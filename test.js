@@ -97,6 +97,7 @@ const parser = new DOMParser();
 fetch("/api/sitemap")
 .then((xmlString) => {
   const xml = parser.parseFromString(xmlString, "application/xml");
+  console.log(xml);
 
   const urls = xml.getElementsByTagName("url");
   const json = [];
@@ -109,6 +110,7 @@ fetch("/api/sitemap")
 
     json.push({ endpoint, lastmod });
   }
+  console.log(json);
 
   generateNavigation(json);
 })

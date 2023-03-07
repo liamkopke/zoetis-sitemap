@@ -10,8 +10,6 @@ exports.handler = async (event, condition) => {
             body: JSON.stringify({error: err.message})
         }
     }
-
-    console.log(response);
     return {
         statusCode: 200,
         body: JSON.stringify({
