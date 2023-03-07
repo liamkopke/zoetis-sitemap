@@ -54,10 +54,10 @@ function generateNavigation(endpoints) {
         const a = document.createElement("a");
         a.href = `https://www2.zoetis.ca${endpoints.filter(
           (data) => {
-            console.log(data.endpoint.endsWith(key).endpoint);
-            return data.endpoint.endsWith(key)["endpoint"];
+            console.log(data.endpoint.endsWith(key));
+            return data.endpoint.endsWith(key);
           }
-        )}`;
+        ).endpoint}`;
         a.textContent = key;
         li.appendChild(a);
   
