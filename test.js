@@ -50,12 +50,16 @@ function generateNavigation(endpoints) {
         const li = document.createElement("li");
         li.id = key;
   
+        // Get object for that key
+        const obj = getHref(key, endpoints);
+
         // Create an anchor tag element with the ID as the href attribute
         const a = document.createElement("a");
-        a.href = `https://www2.zoetis.ca${getHref(key, endpoints)}`;
+        a.href = `https://www2.zoetis.ca${obj.endpoint}`;
         a.textContent = key;
         li.appendChild(a);
   
+        console.log(typeof endpointObject[key]);
         // If the current value is a string (i.e. an endpoint), add it as an anchor tag
         if (typeof endpointObject[key] === "string") {
           const small = document.createElement("small");
