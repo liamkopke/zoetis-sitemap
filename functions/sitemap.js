@@ -2,7 +2,7 @@ exports.handler = async (event, condition) => {
     let response
     try{
         await fetch("https://www2.zoetis.ca/sitemap.xml")
-        .then((res) => response = res)
+        .then((res) => response = res.text())
     }
     catch (err){
         return{
