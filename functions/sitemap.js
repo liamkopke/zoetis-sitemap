@@ -1,17 +1,16 @@
+const axios = require('axios');
+
 exports.handler = async (event, condition) => {
-    fetch("https://www2.zoetis.ca/sitemap.xml")
+    const url = "https://www2.zoetis.ca/sitemap.xml";
+    axios.get(url)
         .then((response) => {
-            console.log(response.text())
+            console.log(response);
+            console.log(response.data);
+            return {
+                statusCode: 200,
+                body: response.data
+            }
         })
-        // .then((xmlString) => {
-        //     console.log(xmlString);
-        //     return {
-        //         statusCode: 200,
-        //         body: JSON.stringify({
-        //             data: xmlString
-        //         })
-        //     }
-        // })
         .catch((err) => {
             console.log(err);
             return{
