@@ -1,9 +1,10 @@
-const fetch = require('node-fetch')
+import fetch from "node-fetch"
 
 exports.handler = async (event, condition) => {
     let response
     try{
-        reponse = await fetch("https://www2.zoetis.ca/sitemap.xml")   
+        await fetch("https://www2.zoetis.ca/sitemap.xml")
+        .then((res) => response = res.text())
     }
     catch (err){
         return{
@@ -12,6 +13,7 @@ exports.handler = async (event, condition) => {
         }
     }
 
+    console.log(response);
     return {
         statusCode: 200,
         body: JSON.stringify({
