@@ -97,7 +97,7 @@ const parser = new DOMParser();
 fetch("/api/sitemap")
 .then((xmlString) => {
   const xml = parser.parseFromString(xmlString, "application/xml");
-  console.log(xml);
+  console.log(xmlString);
 
   const urls = xml.getElementsByTagName("url");
   const json = [];
