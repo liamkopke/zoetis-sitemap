@@ -94,7 +94,7 @@ function generateNavigation(endpoints) {
 
 const parser = new DOMParser();
 
-fetch("/.netlify/functions/sitemap")
+fetch("/api/sitemap")
 .then((xmlString) => {
   const xml = parser.parseFromString(xmlString, "application/xml");
 
