@@ -54,7 +54,8 @@ function generateNavigation(endpoints) {
         const a = document.createElement("a");
         a.href = `https://www2.zoetis.ca${endpoints.filter(
           (data) => {
-            return data.endpoint.endsWith(key);
+            console.log(data.endpoint.endsWith(key).endpoint);
+            return data.endpoint.endsWith(key)["endpoint"];
           }
         )}`;
         a.textContent = key;
