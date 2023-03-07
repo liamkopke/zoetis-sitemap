@@ -52,7 +52,6 @@ function generateNavigation(endpoints) {
   
         // Create an anchor tag element with the ID as the href attribute
         const a = document.createElement("a");
-        console.log(endpointObject[key]);
         a.href = `${endpointObject[key]}`;
         a.textContent = key;
         li.appendChild(a);
@@ -107,6 +106,7 @@ fetch("/.netlify/functions/sitemap")
     json.push({ endpoint, lastmod });
   }
 
+  console.log(json);
   generateNavigation(json);
 })
 .catch((error) => {
