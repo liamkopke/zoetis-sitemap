@@ -1,9 +1,18 @@
 exports.handler = async (event, condition) => {
-    fetch("https://www2.zoetis.ca/sitemap.xml")
-    .then((response) => {
-        return {
-            statusCode: 200,
-            body: response.text()
-        };
-    });    
+    try{
+        reponse = await fetch("https://www2.zoetis.ca/sitemap.xml")   
+    }
+    catch{
+        return{
+            statusCode: err.statusCode || 500,
+            body: JSON.stringify({error: err.message})
+        }
+    }
+
+    return {
+        statusCode: 200,
+        body: JSON.stringify({
+            data: response
+        })
+    }
 };
