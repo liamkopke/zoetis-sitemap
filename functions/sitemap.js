@@ -11,6 +11,7 @@ exports.handler = async (event, condition) => {
             }
         })
         .catch((err) => {
+            console.log(err);
             return{
                 statusCode: err.statusCode || 500,
                 body: JSON.stringify({error: err.message})
