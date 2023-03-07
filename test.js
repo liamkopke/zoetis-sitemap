@@ -55,6 +55,7 @@ function generateNavigation(endpoints) {
 
         // Create an anchor tag element with the ID as the href attribute
         const a = document.createElement("a");
+        console.log(obj);
         a.href = `https://www2.zoetis.ca${obj != [] ? obj.endpoint : '/'}`;
         a.textContent = key;
         li.appendChild(a);
@@ -96,8 +97,7 @@ function getHref(key, endpoints){
       return data.endpoint.endsWith(key);
     }
   )
-
-  console.log(x);
+  
   return x[0];
 }
 
