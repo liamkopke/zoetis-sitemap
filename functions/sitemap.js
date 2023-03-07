@@ -1,5 +1,7 @@
+const fetch = require('node-fetch')
 
 exports.handler = async (event, condition) => {
+    let response
     try{
         reponse = await fetch("https://www2.zoetis.ca/sitemap.xml")   
     }
