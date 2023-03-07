@@ -97,7 +97,7 @@ function getHref(key, endpoints){
     }
   )
 
-  console.log(x[0]);
+  console.log(x);
   return x[0];
 }
 
