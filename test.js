@@ -52,9 +52,8 @@ function generateNavigation(endpoints) {
   
         // Create an anchor tag element with the ID as the href attribute
         const a = document.createElement("a");
-        a.href = `${key}`;
+        a.href = `${endpointObject[key]}`;
         a.textContent = key;
-        console.log(endpointObject);
         li.appendChild(a);
   
         // If the current value is a string (i.e. an endpoint), add it as an anchor tag
@@ -94,8 +93,6 @@ fetch("/.netlify/functions/sitemap")
 .then(response => response.text())
 .then((xmlString) => {
   const xml = parser.parseFromString(xmlString, "application/xml");
-  console.log(xml);
-  console.log(xmlString);
 
   const urls = xml.getElementsByTagName("url");
   const json = [];
@@ -108,7 +105,6 @@ fetch("/.netlify/functions/sitemap")
 
     json.push({ endpoint, lastmod });
   }
-  console.log(json);
 
   generateNavigation(json);
 })
