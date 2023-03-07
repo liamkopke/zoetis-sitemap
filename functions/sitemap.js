@@ -2,13 +2,13 @@ const axios = require('axios');
 
 exports.handler = async (event, condition) => {
     const url = "https://www2.zoetis.ca/sitemap.xml";
-    axios.get(url)
+    fetch(url)
         .then((response) => {
+            console.log(response.json());
             console.log(response);
-            console.log(response.data);
             return {
                 statusCode: 200,
-                body: response.data
+                body: response.json()
             }
         })
         .catch((err) => {
