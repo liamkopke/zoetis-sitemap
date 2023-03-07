@@ -3,116 +3,115 @@
 //   .then(response => response.json())
 //   .then(data => generateNavigation(data))
 
-// function splitEndpoints(endpoints) {
-//     // Create an object to hold the result, with the root level "/"
-//     const result = { "/": {} };
+function splitEndpoints(endpoints) {
+    // Create an object to hold the result, with the root level "/"
+    const result = { "/": {} };
     
-//     // Loop through each endpoint in the array
-//     for (let i = 0; i < endpoints.length; i++) {
-//         // Split the endpoint into blocks
-//         const blocks = endpoints[i].endpoint.split("/");
+    // Loop through each endpoint in the array
+    for (let i = 0; i < endpoints.length; i++) {
+        // Split the endpoint into blocks
+        const blocks = endpoints[i].endpoint.split("/");
     
-//         // Start at the root level
-//         let currentBlock = result["/"];
+        // Start at the root level
+        let currentBlock = result["/"];
     
-//         // Loop through each block (skipping the first empty one)
-//         for (let j = 1; j < blocks.length; j++) {
-//         const block = blocks[j];
+        // Loop through each block (skipping the first empty one)
+        for (let j = 1; j < blocks.length; j++) {
+        const block = blocks[j];
     
-//         // Ignore empty blocks (e.g. if the endpoint starts with "/")
-//         if (block !== "") {
-//             // If the block doesn't exist yet, create it
-//             if (!currentBlock["/" + block]) {
-//             currentBlock["/" + block] = {};
-//             }
+        // Ignore empty blocks (e.g. if the endpoint starts with "/")
+        if (block !== "") {
+            // If the block doesn't exist yet, create it
+            if (!currentBlock["/" + block]) {
+            currentBlock["/" + block] = {};
+            }
     
-//             // Move down one level
-//             currentBlock = currentBlock["/" + block];
-//         }
-//         }
+            // Move down one level
+            currentBlock = currentBlock["/" + block];
+        }
+        }
     
-//         // Store the endpoint at the current block
-//         currentBlock = endpoints[i].endpoint;
-//     }
+        // Store the endpoint at the current block
+        currentBlock = endpoints[i].endpoint;
+    }
     
-//     // Return the result object
-//     return result;
-// }
+    // Return the result object
+    return result;
+}
 
-// function generateNavigation(endpoints) {
-//     // Split the endpoints into an object
-//     const endpointObject = splitEndpoints(endpoints);
-//     console.log(endpointObject);
+function generateNavigation(endpoints) {
+    // Split the endpoints into an object
+    const endpointObject = splitEndpoints(endpoints);
+    console.log(endpointObject);
   
-//     // Create a helper function to recursively generate the HTML
-//     function generateHTML(endpointObject) {
-//       // Create a new unordered list element
-//       const ul = document.createElement("ul");
+    // Create a helper function to recursively generate the HTML
+    function generateHTML(endpointObject) {
+      // Create a new unordered list element
+      const ul = document.createElement("ul");
   
-//       // Loop through each key in the endpoint object
-//       for (const key in endpointObject) {
-//         // Create a new list item element with the key as the ID
-//         const li = document.createElement("li");
-//         li.id = key;
+      // Loop through each key in the endpoint object
+      for (const key in endpointObject) {
+        // Create a new list item element with the key as the ID
+        const li = document.createElement("li");
+        li.id = key;
   
-//         // Create an anchor tag element with the ID as the href attribute
-//         const a = document.createElement("a");
-//         a.href = `${key}`;
-//         a.textContent = key;
-//         li.appendChild(a);
+        // Create an anchor tag element with the ID as the href attribute
+        const a = document.createElement("a");
+        a.href = `${key}`;
+        a.textContent = key;
+        li.appendChild(a);
   
-//         // If the current value is a string (i.e. an endpoint), add it as an anchor tag
-//         if (typeof endpointObject[key] === "string") {
-//           const small = document.createElement("small");
-//           small.textContent = "Some kind of description";
-//           a.appendChild(small);
-//         }
-//         // Otherwise, generate the HTML for the nested object and append it to the list item
-//         else {
-//           const nestedHTML = generateHTML(endpointObject[key]);
-//           li.appendChild(nestedHTML);
-//         }
+        // If the current value is a string (i.e. an endpoint), add it as an anchor tag
+        if (typeof endpointObject[key] === "string") {
+          const small = document.createElement("small");
+          small.textContent = "Some kind of description";
+          a.appendChild(small);
+        }
+        // Otherwise, generate the HTML for the nested object and append it to the list item
+        else {
+          const nestedHTML = generateHTML(endpointObject[key]);
+          li.appendChild(nestedHTML);
+        }
   
-//         // Append the list item to the unordered list
-//         ul.appendChild(li);
-//       }
+        // Append the list item to the unordered list
+        ul.appendChild(li);
+      }
   
-//       // Return the unordered list element
-//       return ul;
-//     }
+      // Return the unordered list element
+      return ul;
+    }
   
-//     // Generate the HTML for the endpoint object
-//     const navHTML = generateHTML(endpointObject);
+    // Generate the HTML for the endpoint object
+    const navHTML = generateHTML(endpointObject);
   
-//     // Add the nav HTML to the document
-//     const nav = document.createElement("nav");
-//     nav.classList.add("primary");
-//     nav.appendChild(navHTML);
-//     document.body.appendChild(nav);
-//   }
+    // Add the nav HTML to the document
+    const nav = document.createElement("nav");
+    nav.classList.add("primary");
+    nav.appendChild(navHTML);
+    document.body.appendChild(nav);
+  }
 
 
 const parser = new DOMParser();
 
-fetch("https://www2.zoetis.ca/sitemap.xml")
-.then((response) => response.text())
+fetch("/sitemap")
 .then((xmlString) => {
-    const xml = parser.parseFromString(xmlString, "application/xml");
+  const xml = parser.parseFromString(xmlString, "application/xml");
 
-    const urls = xml.getElementsByTagName("url");
-    const json = [];
+  const urls = xml.getElementsByTagName("url");
+  const json = [];
 
-    for (let i = 0; i < urls.length; i++) {
+  for (let i = 0; i < urls.length; i++) {
     const url = urls[i];
     const loc = url.getElementsByTagName("loc")[0].textContent;
     const endpoint = loc.replace("https://www2.zoetis.ca", "");
     const lastmod = url.getElementsByTagName("lastmod")[0].textContent;
 
     json.push({ endpoint, lastmod });
-    }
+  }
 
-    console.log(JSON.stringify(json));
+  generateNavigation(json);
 })
 .catch((error) => {
-    console.error(error);
+  console.error(error);
 });
