@@ -90,6 +90,8 @@ function generateNavigation(endpoints) {
   }
 
 function getHref(key, endpoints){
+  console.log(key);
+  console.log(endpoints);
   const x = endpoints.filter(
     (data) => {
       return data.endpoint.endsWith(key);
