@@ -1,12 +1,8 @@
 exports.handler = async (event, condition) => {
     let response
     try{
-        let test = await fetch("https://www2.zoetis.ca/sitemap.xml")
-        .then((res) => {
-            response = res.text();
-            console.log(response);
-        })
-        console.log(test);
+        let test = await fetch("https://www2.zoetis.ca/sitemap.xml");
+        console.log(test.text());
     }
     catch (err){
         return{
