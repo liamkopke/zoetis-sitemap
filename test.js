@@ -1,8 +1,4 @@
-// // Fetch JSON data
-// fetch('sitemap.json')
-//   .then(response => response.json())
-//   .then(data => generateNavigation(data))
-
+const axios = require('axios');
 function splitEndpoints(endpoints) {
     // Create an object to hold the result, with the root level "/"
     const result = { "/": {} };
@@ -94,7 +90,7 @@ function generateNavigation(endpoints) {
 
 const parser = new DOMParser();
 
-fetch("/.netlify/functions/sitemap")
+axios.get("/.netlify/functions/sitemap")
 .then((xmlString) => {
   const xml = parser.parseFromString(xmlString, "application/xml");
   console.log(xmlString);
