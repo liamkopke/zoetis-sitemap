@@ -54,6 +54,7 @@ function generateNavigation(endpoints) {
         const a = document.createElement("a");
         a.href = `${key}`;
         a.textContent = key;
+        console.log(endpointObject);
         li.appendChild(a);
   
         // If the current value is a string (i.e. an endpoint), add it as an anchor tag
