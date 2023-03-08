@@ -75,6 +75,13 @@ ol, ul {
 	padding: 40px;
 }
 
+.sitemap div{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+}
+
 li{
 	content: attr(id);
 }
