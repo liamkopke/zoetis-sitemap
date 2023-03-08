@@ -57,6 +57,7 @@ h2 {
 
 a {
 	text-decoration: none;
+	white-space: nowrap;
 }
 
 ol, ul {
@@ -280,5 +281,5 @@ ul, li {
 .primary > ul > li > a,
 .primary > ul > li > ul > li,
 .secondary li a {
-	width: 220px;
+	width: 300px;
 }
