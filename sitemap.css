@@ -253,7 +253,7 @@ ul, li {
 /* --- Secondary --- */
 .secondary {
 	display: block;
-	width: 300%;
+	width: auto;
 	margin-top: 20px;
 	padding-top: 20px;
 	border-top: dotted 2px #eee;
