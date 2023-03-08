@@ -149,7 +149,7 @@ fetch("/.netlify/functions/sitemap")
   generateNavigation(json);
 
   // Set width of the body to all the content
-  document.body.style.width = document.body.scrollWidth + 'px';
+  // document.body.style.width = document.body.scrollWidth + 'px';
 })
 .catch((error) => {
   console.error(error);
