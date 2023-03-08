@@ -1,5 +1,8 @@
 let endpointMaster
-let ulSec = document.querySelector(".secondary").querySelector('ul')
+const ulSec = document.querySelector(".secondary").querySelector('ul')
+console.log(ulSec)
+console.log(document.querySelector(".secondary"))
+console.log(document.querySelector(".secondary ul"))
 
 function splitEndpoints(endpoints) {
     // Create an object to hold the result, with the root level "/"
