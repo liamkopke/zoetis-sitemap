@@ -123,7 +123,8 @@ function generateNavigation(endpoints) {
             newNav.appendChild(newUL);
     
             // Replace the existing li element with the new nav element
-            li.replaceWith(newNav);
+            console.log(newNav);
+            document.body.appendChild(newNav);
           }
         }
     
