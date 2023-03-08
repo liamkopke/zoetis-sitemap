@@ -82,6 +82,11 @@ ol, ul {
 	justify-content: center;
 }
 
+.sitemap div h1 {
+	margin: 0;
+	padding: 0.2rem;
+}
+
 li{
 	content: attr(id);
 }
