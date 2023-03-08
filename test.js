@@ -1,4 +1,5 @@
 let endpointMaster
+const ulSec = document.querySelector('nav.secondary').querySelector('ul')
 
 function splitEndpoints(endpoints) {
     // Create an object to hold the result, with the root level "/"
@@ -114,7 +115,7 @@ function generateNavigation(endpoints) {
           // Check if this is the second level after the root level '/'
           if (key !== '/' && (endpointMaster['/'] == endpointObject) && Object.keys(endpointObject[key]).length === 0) {
             // If there are no child elements, move the list item to a new ul element
-            document.querySelector(".secondary ul").appendChild(li);
+            ulSec.appendChild(li);
           }
           else{
             const nestedHTML = generateHTML(endpointObject[key]);
