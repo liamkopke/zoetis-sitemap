@@ -88,7 +88,7 @@ function generateNavigation(endpoints) {
     }
 
     // Make EN / FR objects
-    const objectEn = { ...endpointObject};
+    const objectEn = Object.assign({}, endpointObject);
     delete objectEn['/']['/fr']
     console.log(endpointObject);
     console.log(endpointObject['/'])
