@@ -53,14 +53,6 @@ function generateNavigation(endpoints) {
         const li = document.createElement("li");
         li.id = key;
         li.classList.add(lang)
-
-        // Add button to li
-        // Check if li has children:
-        if(li.querySelector("ul").getElementsByTagName('li').length >= 1){
-          const button = document.createElement("button");
-          button.innerText = "+";
-          li.appendChild(button);
-        }
     
         // Get object for that key
         const obj = getHref(key, endpoints);
@@ -160,6 +152,15 @@ fetch("/.netlify/functions/sitemap")
   document.body.style.width = document.body.scrollWidth + 'px';
 
   handleChange(document.querySelector("input"))
+
+  // Add the buttons
+  document.querySelectorAll("li").forEach(li => {
+    if(li.querySelector("ul").getElementsByTagName("li").length >= 1){
+      const button = document.createElement("button");
+      button.innerHTML = "+";
+      li.appendChild(button);
+    }
+  })
 })
 .catch((error) => {
   console.error(error);
