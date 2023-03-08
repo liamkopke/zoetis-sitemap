@@ -112,6 +112,7 @@ function generateNavigation(endpoints) {
           li.appendChild(nestedHTML);
     
           // Check if this is the second level after the root level '/'
+          console.log("Key: " + key + " - Endp Obj: " + endpointObject)
           if (key !== '/' && Object.keys(endpointObject[key]).length === 0) {
             // If there are no child elements, move the list item to a new ul element
             const newUL = document.createElement('ul');
@@ -123,7 +124,6 @@ function generateNavigation(endpoints) {
             newNav.appendChild(newUL);
     
             // Replace the existing li element with the new nav element
-            console.log(newNav);
             document.body.appendChild(newNav);
           }
         }
