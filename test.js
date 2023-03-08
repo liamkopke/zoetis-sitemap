@@ -42,48 +42,6 @@ function generateNavigation(endpoints) {
     const endpointObject = splitEndpoints(endpoints);
     endpointMaster = endpointObject
     console.log(endpointObject);
-  
-    /*
-    // Create a helper function to recursively generate the HTML
-    function generateHTML(endpointObject) {
-      // Create a new unordered list element
-      const ul = document.createElement("ul");
-  
-      // Loop through each key in the endpoint object
-      for (const key in endpointObject) {
-        // Create a new list item element with the key as the ID
-        const li = document.createElement("li");
-        li.id = key;
-  
-        // Get object for that key
-        const obj = getHref(key, endpoints);
-
-        // Create an anchor tag element with the ID as the href attribute
-        const a = document.createElement("a");
-        a.href = `https://www2.zoetis.ca${obj != undefined ? obj.endpoint : key}`;
-        a.textContent = key;
-        li.appendChild(a);
-  
-        // If the current value is a string (i.e. an endpoint), add it as an anchor tag
-        if (typeof endpointObject[key] === "string") {
-          const small = document.createElement("small");
-          small.textContent = "Some kind of description";
-          a.appendChild(small);
-        }
-        // Otherwise, generate the HTML for the nested object and append it to the list item
-        else {
-          const nestedHTML = generateHTML(endpointObject[key]);
-          li.appendChild(nestedHTML);
-        }
-  
-        // Append the list item to the unordered list
-        ul.appendChild(li);
-      }
-  
-      // Return the unordered list element
-      return ul;
-    }
-    */
 
     function generateHTML(endpointObject) {
       // Create a new unordered list element
@@ -128,13 +86,23 @@ function generateNavigation(endpoints) {
       // Return the unordered list element
       return ul;
     }
+
+    // Make EN / FR objects
+    const objectEn = { ...endpointObject};
+    delete objectEn['/']['/fr']
+    const objectFr = endpointObject['/']['fr'];
   
     // Generate the HTML for the endpoint object
-    const navHTML = generateHTML(endpointObject);
+    const navHTMLEn = generateHTML(objectEn);
+    const navHTMLFr = generateHTML(objectFr);
   
     // Add the nav HTML to the document
-    const nav = document.querySelector(".primary");
-    nav.appendChild(navHTML);
+    const navEn = document.querySelector(".en");
+    const navFr = document.querySelector(".fr");
+
+    // Add the content
+    navEn.appendChild(navHTMLEn);
+    navFr.appendChild(navHTMLFr);
   }
 
 function getHref(key, endpoints){
