@@ -56,7 +56,11 @@ function generateNavigation(endpoints) {
 
         // Add button to li
         // Check if li has children:
-        console.log(li);
+        if(li.querySelector("ul").getElementsByTagName('li').length >= 1){
+          const button = document.createElement("button");
+          button.innerText = "+";
+          li.appendChild(button);
+        }
     
         // Get object for that key
         const obj = getHref(key, endpoints);
