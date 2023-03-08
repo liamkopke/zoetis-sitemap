@@ -39,6 +39,7 @@ function generateNavigation(endpoints) {
     const endpointObject = splitEndpoints(endpoints);
     console.log(endpointObject);
   
+    /*
     // Create a helper function to recursively generate the HTML
     function generateHTML(endpointObject) {
       // Create a new unordered list element
@@ -75,6 +76,61 @@ function generateNavigation(endpoints) {
         ul.appendChild(li);
       }
   
+      // Return the unordered list element
+      return ul;
+    }
+    */
+
+    function generateHTML(endpointObject) {
+      // Create a new unordered list element
+      const ul = document.createElement("ul");
+    
+      // Loop through each key in the endpoint object
+      for (const key in endpointObject) {
+        // Create a new list item element with the key as the ID
+        const li = document.createElement("li");
+        li.id = key;
+    
+        // Get object for that key
+        const obj = getHref(key, endpoints);
+    
+        // Create an anchor tag element with the ID as the href attribute
+        const a = document.createElement("a");
+        a.href = `https://www2.zoetis.ca${obj != undefined ? obj.endpoint : key}`;
+        a.textContent = key;
+        li.appendChild(a);
+    
+        // If the current value is a string (i.e. an endpoint), add it as an anchor tag
+        if (typeof endpointObject[key] === "string") {
+          const small = document.createElement("small");
+          small.textContent = "Some kind of description";
+          a.appendChild(small);
+        }
+        // Otherwise, generate the HTML for the nested object and append it to the list item
+        else {
+          const nestedHTML = generateHTML(endpointObject[key]);
+          li.appendChild(nestedHTML);
+    
+          // Check if this is the second level after the root level '/'
+          if (key !== '/' && Object.keys(endpointObject[key]).length === 0) {
+            // If there are no child elements, move the list item to a new ul element
+            const newUL = document.createElement('ul');
+            newUL.appendChild(li);
+            
+            // Create a new nav element with class 'secondary' and append the new ul element
+            const newNav = document.createElement('nav');
+            newNav.classList.add('secondary');
+            newNav.appendChild(newUL);
+    
+            // Replace the existing li element with the new nav element
+            li.replaceWith(newNav);
+          }
+        }
+    
+        // Append the list item to the unordered list
+        ul.appendChild(li);
+      }
+    
       // Return the unordered list element
       return ul;
     }
