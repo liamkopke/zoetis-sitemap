@@ -112,9 +112,6 @@ function generateNavigation(endpoints) {
         }
         // Otherwise, generate the HTML for the nested object and append it to the list item
         else {
-          const nestedHTML = generateHTML(endpointObject[key]);
-          
-    
           // Check if this is the second level after the root level '/'
           if (key !== '/' && (endpointMaster['/'] == endpointObject) && Object.keys(endpointObject[key]).length === 0) {
             // If there are no child elements, move the list item to a new ul element
@@ -122,6 +119,7 @@ function generateNavigation(endpoints) {
             ulSec.appendChild(li); 
           }
           else{
+            const nestedHTML = generateHTML(endpointObject[key]);
             li.appendChild(nestedHTML);
           }
         }
