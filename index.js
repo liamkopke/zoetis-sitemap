@@ -80,10 +80,10 @@ function generateNavigation(endpoints) {
         console.log(endpointMasterEn['/'])
         console.log(endpointMasterEn['/'] == endpointObject)
         console.log("Endpoint Master FR[/][/fr]:")
-        console.log(endpointMasterFr['/']["/fr"])
-        console.log(endpointMasterFr['/']["/fr"] == endpointObject)
-        console.log(endpointMasterEn['/'] == endpointObject || endpointMasterFr['/']["/fr"] == endpointObject)
-        if (key !== '/' && key !== "/fr" && ((endpointMaster['/'] == endpointObject) || (endpointMaster['/']["/fr"] == endpointObject)) && Object.keys(endpointObject[key]).length === 0) {
+        console.log(endpointMasterFr["/fr"])
+        console.log(endpointMasterFr["/fr"] == endpointObject)
+        console.log(endpointMasterEn['/'] == endpointObject || endpointMasterFr["/fr"] == endpointObject)
+        if (key !== '/' && key !== "/fr" && ((endpointMasterEn['/'] == endpointObject) || (endpointMasterFr["/fr"] == endpointObject)) && Object.keys(endpointObject[key]).length === 0) {
           // If there are no child elements, move the list item to a new ul element
           ulIndex.appendChild(li);
         }
