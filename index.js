@@ -1,6 +1,6 @@
 let endpointMasterEn
 let endpointMasterFr
-const ulIndex = document.querySelector('.index ul')
+const ulIndex = document.querySelector('.secondary ul')
 
 function splitEndpoints(endpoints) {
     // Create an object to hold the result, with the root level "/"
@@ -52,6 +52,7 @@ function generateNavigation(endpoints) {
         // Create a new list item element with the key as the ID
         const li = document.createElement("li");
         li.id = key;
+        li.classList.add(lang)
     
         // Get object for that key
         const obj = getHref(key, endpoints);
@@ -70,19 +71,6 @@ function generateNavigation(endpoints) {
         */
         
         // Check if this is the second level after the root level '/'
-        console.log("Key: " + key)
-        console.log(key !== '/')
-        console.log(key !== "/fr")
-        console.log(Object.keys(endpointObject[key]).length)
-        console.log("Endpoint Object:")
-        console.log(endpointObject)
-        console.log("Endpoint Master EN[/]:")
-        console.log(endpointMasterEn['/'])
-        console.log(endpointMasterEn['/'] == endpointObject)
-        console.log("Endpoint Master FR[/][/fr]:")
-        console.log(endpointMasterFr["/fr"])
-        console.log(endpointMasterFr["/fr"] == endpointObject)
-        console.log(endpointMasterEn['/'] == endpointObject || endpointMasterFr["/fr"] == endpointObject)
         if (key !== '/' && key !== "/fr" && ((endpointMasterEn['/'] == endpointObject) || (endpointMasterFr["/fr"] == endpointObject)) && Object.keys(endpointObject[key]).length === 0) {
           // If there are no child elements, move the list item to a new ul element
           ulIndex.appendChild(li);
