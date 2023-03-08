@@ -1,5 +1,5 @@
 let endpointMaster
-const ulSec = document.querySelector('nav.secondary').querySelector('ul')
+const ulIndex = document.querySelector('.index ul')
 
 function splitEndpoints(endpoints) {
     // Create an object to hold the result, with the root level "/"
@@ -103,28 +103,26 @@ function generateNavigation(endpoints) {
         a.href = `https://www2.zoetis.ca${obj != undefined ? obj.endpoint : key}`;
         a.textContent = key;
         li.appendChild(a);
-    
-        // If the current value is a string (i.e. an endpoint), add it as an anchor tag
-        if (typeof endpointObject[key] === "string") {
-          const small = document.createElement("small");
-          small.textContent = "Some kind of description";
-          a.appendChild(small);
+
+        // For description, add <small> to <a>
+        /*
+        const small = document.createElement("small");
+        small.textContent = "Some kind of description";
+        a.appendChild(small);
+        */
+        
+        // Check if this is the second level after the root level '/'
+        if (key !== '/' && (endpointMaster['/'] == endpointObject) && Object.keys(endpointObject[key]).length === 0) {
+          // If there are no child elements, move the list item to a new ul element
+          ulIndex.appendChild(li);
         }
-        // Otherwise, generate the HTML for the nested object and append it to the list item
-        else {
-          // Check if this is the second level after the root level '/'
-          if (key !== '/' && (endpointMaster['/'] == endpointObject) && Object.keys(endpointObject[key]).length === 0) {
-            // If there are no child elements, move the list item to a new ul element
-            ulSec.appendChild(li);
-          }
-          else{
-            const nestedHTML = generateHTML(endpointObject[key]);
-            li.appendChild(nestedHTML);
-          }
+        else{
+          const nestedHTML = generateHTML(endpointObject[key]);
+          li.appendChild(nestedHTML);           
+  
+          // Append the list item to the unordered list
+          ul.appendChild(li);
         }
-    
-        // Append the list item to the unordered list
-        ul.appendChild(li);
       }
     
       // Return the unordered list element
@@ -135,10 +133,8 @@ function generateNavigation(endpoints) {
     const navHTML = generateHTML(endpointObject);
   
     // Add the nav HTML to the document
-    const nav = document.createElement("nav");
-    nav.classList.add("primary");
+    const nav = document.querySelector(".primary");
     nav.appendChild(navHTML);
-    document.body.appendChild(nav);
   }
 
 function getHref(key, endpoints){
