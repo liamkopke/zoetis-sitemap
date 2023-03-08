@@ -120,6 +120,7 @@ function generateNavigation(endpoints) {
           console.log(endpointObject[key])
           if (key !== '/' && (endpointMaster['/'] == endpointObject) && endpointObject[key] == undefined) {
             // If there are no child elements, move the list item to a new ul element
+            console.log("In Loop")
             navSec.querySelector('ul').appendChild(li);
           }
           else{
