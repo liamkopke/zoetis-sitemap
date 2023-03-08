@@ -154,3 +154,10 @@ fetch("/.netlify/functions/sitemap")
 .catch((error) => {
   console.error(error);
 });
+
+
+// Lang Switch
+function handleChange(checkbox){
+  document.querySelectorAll('.en').toggleAttribute("disabled");
+  document.querySelectorAll('.fr').toggleAttribute("disabled");
+}

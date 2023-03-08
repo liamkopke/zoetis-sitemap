@@ -20,21 +20,17 @@
          <div>
             <h1>EN</h1>
             <label class="switch">
-               <input type="checkbox">
+               <input type="checkbox" onchange="handleChange(this)">
                <span class="slider round"></span>
             </label>
             <h1>FR</h1>
-         </div>         
+         </div>     
+         <nav class="en primary"></nav>
+         <nav class="fr primary"></nav>
+         <nav class="index secondary">
+            <ul></ul>
+         </nav>    
       </div>
-
-      <nav class="en primary"></nav>
-      <nav class="fr primary"></nav>
-
-      <nav class="index secondary">
-         <ul></ul>
-      </nav>
-
       <script src="index.js" defer></script>
-
    </body>
 </html>
