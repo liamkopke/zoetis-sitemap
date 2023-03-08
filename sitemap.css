@@ -263,7 +263,9 @@ ul, li {
 
 /* --- Secondary --- */
 .secondary {
-	display: block;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
 	margin-top: 20px;
 	padding-top: 20px;
 	border-top: dotted 2px #eee;
