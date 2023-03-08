@@ -88,8 +88,11 @@ function generateNavigation(endpoints) {
 
     // Make EN / FR objects   
     console.log('Before:')
-    console.log(endpointObject) 
-    const objectFr = endpointObject['/']['fr'];
+    console.log(JSON.parse(JSON.stringify(endpointObject['/']['/fr']))) 
+    console.log(JSON.parse(JSON.stringify(endpointObject['/fr']))) 
+    console.log(JSON.parse(JSON.stringify(endpointObject['/']['fr']))) 
+    console.log(JSON.parse(JSON.stringify(endpointObject['/']))) 
+    const objectFr = JSON.parse(JSON.stringify(endpointObject['/']['/fr']));
     console.log("After: ")
     console.log(objectFr)
     console.log("Before: ")
