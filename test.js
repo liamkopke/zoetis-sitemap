@@ -116,6 +116,9 @@ function generateNavigation(endpoints) {
           
     
           // Check if this is the second level after the root level '/'
+          console.log("Key: " + key + " - Endp Master equals: " + (endpointMaster['/'] == endpointObject) + " - Endpoint[key] == 0: " + Object.keys(endpointObject[key]).length === 0)
+          console.log(endpointMaster['/'])
+          console.log(endpointObject)
           if (key !== '/' && (endpointMaster['/'] == endpointObject) && Object.keys(endpointObject[key]).length === 0) {
             // If there are no child elements, move the list item to a new ul element
             navSec.querySelector('ul').appendChild(li);
