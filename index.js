@@ -158,6 +158,10 @@ fetch("/.netlify/functions/sitemap")
 
 // Lang Switch
 function handleChange(checkbox){
-  document.querySelectorAll('.en').toggleAttribute("disabled");
-  document.querySelectorAll('.fr').toggleAttribute("disabled");
+  document.querySelectorAll('.en').forEach(elem => {
+    elem.toggleAttribute("disabled");
+  });
+  document.querySelectorAll('.fr').forEach(elem => {
+    elem.toggleAttribute("disabled");
+  })
 }
