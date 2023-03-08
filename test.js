@@ -90,10 +90,10 @@ function generateNavigation(endpoints) {
     // Make EN / FR objects
     const objectEn = JSON.parse(JSON.stringify(endpointObject));
     delete objectEn['/']['/fr']
-    console.log(endpointObject);
-    console.log(endpointObject['/'])
-    console.log(endpointObject['/']['fr'])
+    console.log(objectEn);
+    console.log(objectEn['/']['fr'])
     const objectFr = endpointObject['/']['fr'];
+    console.log(objectFr);
   
     // Generate the HTML for the endpoint object
     const navHTMLEn = generateHTML(objectEn);
