@@ -95,7 +95,7 @@ function generateNavigation(endpoints) {
     console.log("Before: ")
     const objectEn = JSON.parse(JSON.stringify(endpointObject));
     delete objectEn['/']['/fr']
-    consolke.log("After: ")
+    console.log("After: ")
     console.log(objectEn);
     console.log(endpointObject);
   
