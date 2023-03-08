@@ -1,5 +1,5 @@
 let endpointMaster
-let navSec
+let ulSec = document.querySelector(".secondary").querySelector('ul')
 
 function splitEndpoints(endpoints) {
     // Create an object to hold the result, with the root level "/"
@@ -116,14 +116,9 @@ function generateNavigation(endpoints) {
           
     
           // Check if this is the second level after the root level '/'
-          console.log(endpointObject[key])
-          console.log("Key: " + key !== '/')
-          console.log("Length: " + Object.keys(endpointObject[key]).length === 0)
-          console.log((endpointMaster['/'] == endpointObject))
           if (key !== '/' && (endpointMaster['/'] == endpointObject) && Object.keys(endpointObject[key]).length === 0) {
             // If there are no child elements, move the list item to a new ul element
-            console.log("In Loop")
-            navSec.querySelector('ul').appendChild(li); 
+            ulSec.appendChild(li); 
           }
           else{
             li.appendChild(nestedHTML);
@@ -186,12 +181,6 @@ fetch("/.netlify/functions/sitemap")
     json.push({ endpoint, lastmod });
   }
 
-
-  navSec = document.createElement("nav");
-  const ulSec = document.createElement("ul")
-  navSec.classList.add("secondary");
-  navSec.appendChild(ulSec);
-  document.body.appendChild(navSec);
   generateNavigation(json);
 })
 .catch((error) => {
