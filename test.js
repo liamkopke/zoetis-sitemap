@@ -116,7 +116,7 @@ function generateNavigation(endpoints) {
           if (key !== '/' && (endpointMaster['/'] == endpointObject) && Object.keys(endpointObject[key]).length === 0) {
             // If there are no child elements, move the list item to a new ul element
             console.log(li);
-            ulSec.appendChild(li); 
+            ulSec.appendChild(li);
           }
           else{
             const nestedHTML = generateHTML(endpointObject[key]);
