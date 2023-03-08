@@ -42,9 +42,10 @@ function generateNavigation(endpoints) {
     const endpointObject = splitEndpoints(endpoints);
     endpointMaster = endpointObject
 
-    function generateHTML(endpointObject) {
+    function generateHTML(endpointObject, lang) {
       // Create a new unordered list element
       const ul = document.createElement("ul");
+      ul.classList.add(lang)
     
       // Loop through each key in the endpoint object
       for (const key in endpointObject) {
@@ -69,12 +70,12 @@ function generateNavigation(endpoints) {
         */
         
         // Check if this is the second level after the root level '/'
-        if (key !== '/' && (endpointMaster['/'] == endpointObject) && Object.keys(endpointObject[key]).length === 0) {
+        if (key !== '/' && key !== "/fr" && ((endpointMaster['/'] == endpointObject) || (endpointMaster['/']["/fr"] == endpointObject)) && Object.keys(endpointObject[key]).length === 0) {
           // If there are no child elements, move the list item to a new ul element
           ulIndex.appendChild(li);
         }
         else{
-          const nestedHTML = generateHTML(endpointObject[key]);
+          const nestedHTML = generateHTML(endpointObject[key], lang);
           li.appendChild(nestedHTML);           
   
           // Append the list item to the unordered list
@@ -87,15 +88,17 @@ function generateNavigation(endpoints) {
     }
 
     // Make EN / FR objects   
-    const objectFr = JSON.parse(JSON.stringify(endpointObject['/']["/fr"]));
+    const objectFr = {
+      "/fr": JSON.parse(JSON.stringify(endpointObject['/']["/fr"]))
+    };
     console.log("FR:")
     console.log(objectFr)
     const objectEn = JSON.parse(JSON.stringify(endpointObject));
     delete objectEn['/']['/fr']
   
     // Generate the HTML for the endpoint object
-    const navHTMLEn = generateHTML(objectEn);
-    const navHTMLFr = generateHTML(objectFr);
+    const navHTMLEn = generateHTML(objectEn, "en");
+    const navHTMLFr = generateHTML(objectFr, "fr");
   
     // Add the nav HTML to the document
     const navEn = document.querySelector(".en");
