@@ -87,12 +87,12 @@ function generateNavigation(endpoints) {
       return ul;
     }
 
-    // Make EN / FR objects
+    // Make EN / FR objects    
+    const objectFr = endpointObject['/']['fr'];
     const objectEn = JSON.parse(JSON.stringify(endpointObject));
     delete objectEn['/']['/fr']
     console.log(objectEn);
     console.log(objectEn['/']['fr'])
-    const objectFr = endpointObject['/']['fr'];
     console.log(objectFr);
   
     // Generate the HTML for the endpoint object
