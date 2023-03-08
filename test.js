@@ -116,13 +116,11 @@ function generateNavigation(endpoints) {
           
     
           // Check if this is the second level after the root level '/'
-          console.log("Key: " + key + " - Endp[key]: ")
           console.log(endpointObject[key])
-          console.log("Length: " + endpointObject[key].length)
-          console.log("Object.keys.length: " + Object.keys(endpointObject[key]).length)
-          console.log("Object.entries.length: " + Object.entries(endpointObject[key]).length)
+          console.log("Key: " + key !== '/')
+          console.log("Length: " + Object.keys(endpointObject[key]).length === 0)
           console.log((endpointMaster['/'] == endpointObject))
-          if (key !== '/' && (endpointMaster['/'] == endpointObject) && endpointObject[key] == undefined) {
+          if (key !== '/' && (endpointMaster['/'] == endpointObject) && Object.keys(endpointObject[key]).length === 0) {
             // If there are no child elements, move the list item to a new ul element
             console.log("In Loop")
             navSec.querySelector('ul').appendChild(li); 
