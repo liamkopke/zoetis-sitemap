@@ -82,6 +82,7 @@ li a,
 li a.multi:after {
     position: relative;
 	display: block;
+	width: auto;
 	margin: 0;
 	padding: 15px;
 	font-size: 14px;
@@ -252,6 +253,7 @@ ul, li {
 /* --- Secondary --- */
 .secondary {
 	display: block;
+	width: 300%;
 	margin-top: 20px;
 	padding-top: 20px;
 	border-top: dotted 2px #eee;
