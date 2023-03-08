@@ -1,3 +1,6 @@
+let endpointMaster
+let navSec
+
 function splitEndpoints(endpoints) {
     // Create an object to hold the result, with the root level "/"
     const result = { "/": {} };
@@ -37,6 +40,7 @@ function splitEndpoints(endpoints) {
 function generateNavigation(endpoints) {
     // Split the endpoints into an object
     const endpointObject = splitEndpoints(endpoints);
+    endpointMaster = endpointObject
     console.log(endpointObject);
   
     /*
@@ -109,23 +113,15 @@ function generateNavigation(endpoints) {
         // Otherwise, generate the HTML for the nested object and append it to the list item
         else {
           const nestedHTML = generateHTML(endpointObject[key]);
-          li.appendChild(nestedHTML);
+          
     
           // Check if this is the second level after the root level '/'
-          console.log("Key: " + key + " - Endp Obj:")
-          console.log(endpointObject)
-          if (key !== '/' && Object.keys(endpointObject[key]).length === 0) {
+          if (key !== '/' && (endpointMaster['/'] == endpointObject) && Object.keys(endpointObject[key]).length === 0) {
             // If there are no child elements, move the list item to a new ul element
-            const newUL = document.createElement('ul');
-            newUL.appendChild(li);
-            
-            // Create a new nav element with class 'secondary' and append the new ul element
-            const newNav = document.createElement('nav');
-            newNav.classList.add('secondary');
-            newNav.appendChild(newUL);
-    
-            // Replace the existing li element with the new nav element
-            document.body.appendChild(newNav);
+            navSec.querySelector('ul').appendChild(li);
+          }
+          else{
+            li.appendChild(nestedHTML);
           }
         }
     
@@ -185,7 +181,12 @@ fetch("/.netlify/functions/sitemap")
     json.push({ endpoint, lastmod });
   }
 
-  console.log(json);
+
+  navSec = document.createElement("nav");
+  const ulSec = document.createElement("ul")
+  navSec.classList.add("secondary");
+  navSec.appendChild(ulSec);
+  document.body.appendChild(navSec);
   generateNavigation(json);
 })
 .catch((error) => {
