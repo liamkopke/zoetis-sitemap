@@ -158,10 +158,18 @@ fetch("/.netlify/functions/sitemap")
 
 // Lang Switch
 function handleChange(checkbox){
-  document.querySelectorAll('.en').forEach(elem => {
-    elem.toggleAttribute("disabled");
+  document.querySelectorAll('.en').forEach(x => {
+    if (!checkbox.checked) {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
   });
-  document.querySelectorAll('.fr').forEach(elem => {
-    elem.toggleAttribute("disabled");
+  document.querySelectorAll('.fr').forEach(x => {
+    if (checkbox.checked) {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
   })
 }
