@@ -53,6 +53,10 @@ function generateNavigation(endpoints) {
         const li = document.createElement("li");
         li.id = key;
         li.classList.add(lang)
+
+        // Add button to li
+        // Check if li has children:
+        console.log(li);
     
         // Get object for that key
         const obj = getHref(key, endpoints);
