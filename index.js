@@ -41,7 +41,6 @@ function generateNavigation(endpoints) {
     // Split the endpoints into an object
     const endpointObject = splitEndpoints(endpoints);
     endpointMaster = endpointObject
-    console.log(endpointObject);
 
     function generateHTML(endpointObject) {
       // Create a new unordered list element
@@ -87,13 +86,18 @@ function generateNavigation(endpoints) {
       return ul;
     }
 
-    // Make EN / FR objects    
+    // Make EN / FR objects   
+    console.log('Before:')
+    console.log(endpointObject) 
     const objectFr = endpointObject['/']['fr'];
+    console.log("After: ")
+    console.log(objectFr)
+    console.log("Before: ")
     const objectEn = JSON.parse(JSON.stringify(endpointObject));
     delete objectEn['/']['/fr']
+    consolke.log("After: ")
     console.log(objectEn);
-    console.log(objectEn['/']['fr'])
-    console.log(objectFr);
+    console.log(endpointObject);
   
     // Generate the HTML for the endpoint object
     const navHTMLEn = generateHTML(objectEn);
