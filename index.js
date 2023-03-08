@@ -160,14 +160,14 @@ fetch("/.netlify/functions/sitemap")
 function handleChange(checkbox){
   document.querySelectorAll('.en').forEach(x => {
     if (!checkbox.checked) {
-      x.style.display = "block";
+      x.style.display = x.nodeName == "UL" ? "block" : "inline-block";
     } else {
       x.style.display = "none";
     }
   });
   document.querySelectorAll('.fr').forEach(x => {
-    if (checkbox.checked) {
-      x.style.display = "block";
+    if (checkbox.checked) {      
+      x.style.display = x.nodeName == "UL" ? "block" : "inline-block";
     } else {
       x.style.display = "none";
     }
