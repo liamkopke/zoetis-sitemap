@@ -1,4 +1,5 @@
-let endpointMaster
+let endpointMasterEn
+let endpointMasterFr
 const ulIndex = document.querySelector('.index ul')
 
 function splitEndpoints(endpoints) {
@@ -40,7 +41,6 @@ function splitEndpoints(endpoints) {
 function generateNavigation(endpoints) {
     // Split the endpoints into an object
     const endpointObject = splitEndpoints(endpoints);
-    endpointMaster = endpointObject
 
     function generateHTML(endpointObject, lang) {
       // Create a new unordered list element
@@ -76,13 +76,13 @@ function generateNavigation(endpoints) {
         console.log(Object.keys(endpointObject[key]).length)
         console.log("Endpoint Object:")
         console.log(endpointObject)
-        console.log("Endpoint Master[/]:")
-        console.log(endpointMaster['/'])
-        console.log(endpointMaster['/'] == endpointObject)
-        console.log("Endpoint Master[/][/fr]:")
-        console.log(endpointMaster['/']["/fr"])
-        console.log(endpointMaster['/'] == endpointObject)
-        console.log(endpointMaster['/'] == endpointObject || endpointMaster['/'] == endpointObject)
+        console.log("Endpoint Master EN[/]:")
+        console.log(endpointMasterEn['/'])
+        console.log(endpointMasterEn['/'] == endpointObject)
+        console.log("Endpoint Master FR[/][/fr]:")
+        console.log(endpointMasterFr['/']["/fr"])
+        console.log(endpointMasterFr['/']["/fr"] == endpointObject)
+        console.log(endpointMasterEn['/'] == endpointObject || endpointMasterFr['/']["/fr"] == endpointObject)
         if (key !== '/' && key !== "/fr" && ((endpointMaster['/'] == endpointObject) || (endpointMaster['/']["/fr"] == endpointObject)) && Object.keys(endpointObject[key]).length === 0) {
           // If there are no child elements, move the list item to a new ul element
           ulIndex.appendChild(li);
@@ -101,17 +101,15 @@ function generateNavigation(endpoints) {
     }
 
     // Make EN / FR objects   
-    const objectFr = {
+    endpointMasterFr = {
       "/fr": JSON.parse(JSON.stringify(endpointObject['/']["/fr"]))
     };
-    console.log("FR:")
-    console.log(objectFr)
-    const objectEn = JSON.parse(JSON.stringify(endpointObject));
-    delete objectEn['/']['/fr']
+    endpointMasterEn = JSON.parse(JSON.stringify(endpointObject));
+    delete endpointMasterEn['/']['/fr']
   
     // Generate the HTML for the endpoint object
-    const navHTMLEn = generateHTML(objectEn, "en");
-    const navHTMLFr = generateHTML(objectFr, "fr");
+    const navHTMLEn = generateHTML(endpointMasterEn, "en");
+    const navHTMLFr = generateHTML(endpointMasterFr, "fr");
   
     // Add the nav HTML to the document
     const navEn = document.querySelector(".en");
