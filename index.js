@@ -70,6 +70,19 @@ function generateNavigation(endpoints) {
         */
         
         // Check if this is the second level after the root level '/'
+        console.log("Key: " + key)
+        console.log(key !== '/')
+        console.log(key !== "/fr")
+        console.log(Object.keys(endpointObject[key]).length)
+        console.log("Endpoint Object:")
+        console.log(endpointObject)
+        console.log("Endpoint Master[/]:")
+        console.log(endpointMaster['/'])
+        console.log(endpointMaster['/'] == endpointObject)
+        console.log("Endpoint Master[/][/fr]:")
+        console.log(endpointMaster['/']["/fr"])
+        console.log(endpointMaster['/'] == endpointObject)
+        console.log(endpointMaster['/'] == endpointObject || endpointMaster['/'] == endpointObject)
         if (key !== '/' && key !== "/fr" && ((endpointMaster['/'] == endpointObject) || (endpointMaster['/']["/fr"] == endpointObject)) && Object.keys(endpointObject[key]).length === 0) {
           // If there are no child elements, move the list item to a new ul element
           ulIndex.appendChild(li);
