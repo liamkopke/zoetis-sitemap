@@ -52,14 +52,7 @@ function generateNavigation(endpoints) {
         // Create a new list item element with the key as the ID
         const li = document.createElement("li");
         li.id = key;
-        li.classList.add(lang)
-
-        // Add the buttons
-        if(Object.keys(endpointObject[key]).length >= 1){
-          const button = document.createElement("button");
-          button.innerHTML = "+";
-          li.appendChild(button);
-        }
+        li.classList.add(lang)        
     
         // Get object for that key
         const obj = getHref(key, endpoints);
@@ -67,6 +60,14 @@ function generateNavigation(endpoints) {
         // Create an anchor tag element with the ID as the href attribute
         const a = document.createElement("a");
         a.href = `https://www2.zoetis.ca${obj != undefined ? obj.endpoint : key}`;
+
+        // Add the buttons into the a tag
+        if(Object.keys(endpointObject[key]).length >= 1){
+          const button = document.createElement("button");
+          button.innerText = "+";
+          a.appendChild(button);
+        }
+
         a.textContent = key;
         li.appendChild(a);
 
@@ -136,6 +137,7 @@ function getHref(key, endpoints){
 
 const parser = new DOMParser();
 
+// Server Commands - DO NOT DELETE
 fetch("/.netlify/functions/sitemap")
 .then(response => response.text())
 .then((xmlString) => {
@@ -168,17 +170,31 @@ fetch("/.netlify/functions/sitemap")
 // Lang Switch
 function handleChange(checkbox){
   document.querySelectorAll('.en').forEach(x => {
-    if (!checkbox.checked) {
-      x.style.display = x.nodeName == "UL" ? "block" : "inline-block";
-    } else {
-      x.style.display = "none";
-    }
+    toggleVisibility(x, checkbox.checked)
   });
   document.querySelectorAll('.fr').forEach(x => {
-    if (checkbox.checked) {      
-      x.style.display = x.nodeName == "UL" ? "block" : "inline-block";
-    } else {
-      x.style.display = "none";
-    }
+    toggleVisibility(x, checkbox.checked)
   })
+}
+
+// Button See More/Less
+document.querySelectorAll("button").forEach(button => {
+  button.addEventListener('click', event => {
+    // Get ul in same li as button
+    const listElement = button.parentNode.parentNode.querySelector('ul');
+
+    // Toggle vis for ul
+    toggleVisibility(listElement, button.innerText == "+")
+    button.innerText = button.innerText == "-" ? "+" : "-";
+  })
+})
+
+
+function toggleVisibility(element, isVisible){
+  if(isVisible){
+    element.style.display = element.nodeName == "UL" ? "block" : "inline-block";
+  }
+  else{
+    element.style.display = "none";
+  }
 }
