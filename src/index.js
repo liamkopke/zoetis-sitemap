@@ -162,6 +162,7 @@ fetch("/.netlify/functions/sitemap")
   document.body.style.width = document.body.scrollWidth + 'px';
 
   handleChange(document.querySelector("input"))
+  handleButtons();
 })
 .catch((error) => {
   console.error(error);
@@ -178,21 +179,22 @@ function handleChange(checkbox){
   })
 }
 
-// Button See More/Less
-document.querySelectorAll("button").forEach(button => {
-  button.addEventListener('click', event => {
-    console.log('CLICK')    
-    event.stopPropagation();
-    event.preventDefault();
-    // Get ul in same li as button
-    const listElement = button.parentNode.parentNode.querySelector('ul');
+function handleButtons(){
+  // Button See More/Less
+  document.querySelectorAll("button").forEach(button => {
+    button.addEventListener('click', event => {
+      console.log('CLICK')    
+      event.stopPropagation();
+      event.preventDefault();
+      // Get ul in same li as button
+      const listElement = button.parentNode.parentNode.querySelector('ul');
 
-    // Toggle vis for ul
-    toggleVisibility(listElement, button.innerText == "+")
-    button.innerText = button.innerText == "-" ? "+" : "-";
+      // Toggle vis for ul
+      toggleVisibility(listElement, button.innerText == "+")
+      button.innerText = button.innerText == "-" ? "+" : "-";
+    })
   })
-})
-
+}
 
 function toggleVisibility(element, isVisible){
   if(isVisible){
