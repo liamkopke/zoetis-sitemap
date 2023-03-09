@@ -7,7 +7,7 @@
 	--leveltwo: #2ecc71;
 	--levelthree: #e67e22;
 	--levelfour: #9b59b6;
-	--secondary: var(--leveltwo);
+	--secondary: var(--levelone);
 	--bodybackground: #f9fafc;
 	--textColor: #333;
 	--h2Color: #777777;
@@ -306,6 +306,8 @@ ul, li {
 	padding: 0 20px 0 0;
 	margin-bottom: 10px;
 }
+
+.secondary ul li a { border-top-color: var(--secondary)}
 
 .secondary ul li:before,
 .secondary ul li:after {
