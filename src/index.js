@@ -42,17 +42,16 @@ function generateNavigation(endpoints) {
     // Split the endpoints into an object
     const endpointObject = splitEndpoints(endpoints);
 
-    function generateHTML(endpointObject, lang) {
+    function generateHTML(endpointObject) {
       // Create a new unordered list element
       const ul = document.createElement("ul");
-      ul.classList.add(lang)
+      ul.classList.add()
     
       // Loop through each key in the endpoint object
       for (const key in endpointObject) {
         // Create a new list item element with the key as the ID
         const li = document.createElement("li");
-        li.id = key;
-        li.classList.add(lang)        
+        li.id = key;     
     
         // Get object for that key
         const obj = getHref(key, endpoints); 
@@ -85,7 +84,7 @@ function generateNavigation(endpoints) {
           ulIndex.appendChild(li);
         }
         else{
-          const nestedHTML = generateHTML(endpointObject[key], lang);
+          const nestedHTML = generateHTML(endpointObject[key]);
           li.appendChild(nestedHTML);           
   
           // Append the list item to the unordered list
@@ -105,8 +104,8 @@ function generateNavigation(endpoints) {
     delete endpointMasterEn['/']['/fr']
   
     // Generate the HTML for the endpoint object
-    const navHTMLEn = generateHTML(endpointMasterEn, "en");
-    const navHTMLFr = generateHTML(endpointMasterFr, "fr");
+    const navHTMLEn = generateHTML(endpointMasterEn);
+    const navHTMLFr = generateHTML(endpointMasterFr);
   
     // Add the nav HTML to the document
     const navEn = document.querySelector(".en");
@@ -187,14 +186,14 @@ function handleButtons(){
 
       // Toggle vis for ul
       toggleVisibility(listElement, button.innerText == "+")
-      button.innerText = button.innerText == "-" ? "+" : "-";
+      button.innerText = button.innerText == "-" ? "+" : "-";        
     })
   })
 }
 
 function toggleVisibility(element, isVisible){
   if(isVisible){
-    element.style.display = element.nodeName == "UL" ? "block" : "inline-block";
+    element.style.display = "inline-block";
   }
   else{
     element.style.display = "none";
