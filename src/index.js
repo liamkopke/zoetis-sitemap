@@ -68,6 +68,7 @@ function generateNavigation(endpoints) {
           a.appendChild(button);
         }
         a.appendChild(document.createTextNode(key));
+        a.setAttribute("target", '_blank');
 
         li.appendChild(a);
 
