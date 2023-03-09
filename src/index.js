@@ -64,7 +64,7 @@ function generateNavigation(endpoints) {
         // Add the buttons into the a tag
         if(Object.keys(endpointObject[key]).length >= 1){
           const button = document.createElement("button");
-          button.innerText = "+";
+          button.innerText = "-";
           a.appendChild(button);
         }
         a.appendChild(document.createTextNode(key));
@@ -170,7 +170,7 @@ fetch("/.netlify/functions/sitemap")
 // Lang Switch
 function handleChange(checkbox){
   document.querySelectorAll('.en').forEach(x => {
-    toggleVisibility(x, checkbox.checked)
+    toggleVisibility(x, !checkbox.checked)
   });
   document.querySelectorAll('.fr').forEach(x => {
     toggleVisibility(x, checkbox.checked)
@@ -180,6 +180,7 @@ function handleChange(checkbox){
 // Button See More/Less
 document.querySelectorAll("button").forEach(button => {
   button.addEventListener('click', event => {
+    event.preventDefault();
     // Get ul in same li as button
     const listElement = button.parentNode.parentNode.querySelector('ul');
 

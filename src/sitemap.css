@@ -59,6 +59,10 @@ a {
 	white-space: nowrap;
 }
 
+button {
+	margin-right: 5px
+}
+
 
 ol, ul {
 	list-style: none;
