@@ -55,7 +55,7 @@ function generateNavigation(endpoints) {
         li.classList.add(lang)        
     
         // Get object for that key
-        const obj = getHref(key, endpoints);
+        const obj = getHref(key, endpoints); 
     
         // Create an anchor tag element with the ID as the href attribute
         const a = document.createElement("a");
