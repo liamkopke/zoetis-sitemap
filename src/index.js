@@ -180,10 +180,10 @@ function handleChange(checkbox){
 
 // Button See More/Less
 document.querySelectorAll("button").forEach(button => {
-  console.log(button);
   button.addEventListener('click', event => {
-    event.preventDefault();
+    console.log('CLICK')    
     event.stopPropagation();
+    event.preventDefault();
     // Get ul in same li as button
     const listElement = button.parentNode.parentNode.querySelector('ul');
 
