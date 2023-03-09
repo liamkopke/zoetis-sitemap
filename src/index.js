@@ -183,6 +183,7 @@ document.querySelectorAll("button").forEach(button => {
   console.log(button);
   button.addEventListener('click', event => {
     event.preventDefault();
+    event.stopPropagation();
     // Get ul in same li as button
     const listElement = button.parentNode.parentNode.querySelector('ul');
 
