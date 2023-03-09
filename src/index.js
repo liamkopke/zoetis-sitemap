@@ -65,11 +65,9 @@ function generateNavigation(endpoints) {
         if(Object.keys(endpointObject[key]).length >= 1){
           const button = document.createElement("button");
           button.innerText = "+";
-          a.textContent = button + key
+          a.appendChild(button);
         }
-        else{
-          a.textContent = key
-        }
+        a.appendChild(document.createTextNode(key));
 
         li.appendChild(a);
 
