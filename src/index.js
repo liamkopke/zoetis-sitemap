@@ -158,9 +158,6 @@ fetch("/.netlify/functions/sitemap")
 
   generateNavigation(json);
 
-  // Set width of the body to all the content
-  document.body.style.width = document.body.scrollWidth + 'px';
-
   handleChange(document.querySelector("input"))
   handleButtons();
 })
@@ -183,7 +180,6 @@ function handleButtons(){
   // Button See More/Less
   document.querySelectorAll("button").forEach(button => {
     button.addEventListener('click', event => {
-      console.log('CLICK')    
       event.stopPropagation();
       event.preventDefault();
       // Get ul in same li as button

@@ -76,6 +76,7 @@ ol, ul {
 .sitemap {
 	display: inline-block;
 	min-width: 100%;
+	max-width: 100%;
 	padding: 40px;	
 }
 
@@ -268,10 +269,12 @@ ul, li {
 
 /* --- Secondary --- */
 .secondary {
-	display: block;
+	display: inline-block;
 	margin-top: 20px;
 	padding-top: 20px;
 	border-top: dotted 2px #eee;
+	overflow-x: scroll;
+	max-width: 100%;
 }
 
 .secondary ul {
@@ -282,6 +285,7 @@ ul, li {
 	display: inline-block;
 	white-space: normal;
 	padding: 0 20px 0 0;
+	margin-bottom: 10px;
 }
 
 .secondary ul li:before,
