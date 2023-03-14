@@ -1,16 +1,15 @@
 const axios = require('axios');
-const jsdom = require('jsdom');
-const { JSDOM } = jsdom;
+import { parse } from 'node-html-parser';
 
 exports.handler = (event, context, callback) => {    
     console.log(event.queryStringParameters.link);
     axios.get("https://www2.zoetis.ca" + event.queryStringParameters.link)
     .then(response => {
         if(response.status === 200){
-            const data = response.data;
+            const data = parse(response.data);
             console.log(data)
             console.log(data.querySelectorAll('a'))
-            var arr = [], l = document.links;
+            var arr = [], l = data.links;
             for(var i=0; i<l.length; i++) {
                 if(arr.indexOf(l[i].href) === -1){  
                     arr.push(l[i].href);
