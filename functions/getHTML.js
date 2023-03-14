@@ -10,13 +10,18 @@ exports.handler = async (event, context, callback) => {
             executablePath: await chromium.executablePath,
             headless: true
         });
+        console.log("After Browser")
         const page = await browser.newPage();
+        console.log("After New Page")
         await page.goto(url, {
             waitUntil: 'networkidle0'
         });  
+        console.log("After goto")
         var hrefs = await page.$$eval('a', as => as.map(a => a.href));
+        onsole.log("After hrefs")
         console.log(hrefs)
         await browser.close();
+        onsole.log("After close")
         return {
             statusCode: 200,
             body: JSON.stringify(hrefs)
