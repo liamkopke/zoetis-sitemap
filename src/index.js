@@ -73,12 +73,13 @@ async function generateNavigation(endpoints) {
         li.appendChild(a);
 
         // For description, add <small> to <a>  
-        const small = document.createElement("small");
+        /*const small = document.createElement("small");
         console.log(obj != undefined ? obj.endpoint : key);
         let o = await fetch(`/.netlify/functions/getHTML?link=${obj != undefined ? obj.endpoint : key}`)
         console.log(o.body);
         small.textContent = o.text();
         a.appendChild(small);
+        */
         
         // Check if this is the second level after the root level '/'
         if (key !== '/' && key !== "/fr" && ((endpointMasterEn['/'] == endpointObject) || (endpointMasterFr["/fr"] == endpointObject)) && Object.keys(endpointObject[key]).length === 0) {

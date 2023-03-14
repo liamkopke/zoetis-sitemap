@@ -21,7 +21,7 @@ exports.handler = async (event, context, callback) => {
         onsole.log("After hrefs")
         console.log(hrefs)
         await browser.close();
-        onsole.log("After close")
+        console.log("After close")
         return {
             statusCode: 200,
             body: JSON.stringify(hrefs)
