@@ -1,12 +1,13 @@
 const axios = require('axios');
-const cheerio = require('cheerio');
+const jsdom = require('jsdom');
+const { JSDOM } = jsdom;
 
 exports.handler = (event, context, callback) => {    
     console.log(event.queryStringParameters.link);
     axios.get("https://www2.zoetis.ca" + event.queryStringParameters.link)
     .then(response => {
         if(response.status === 200){
-            const html = response.data
+            const html = new JSDOM(response.data)
             console.log(html)
             console.log(html.links)
             var arr = [], l = html.links;
