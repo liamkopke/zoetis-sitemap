@@ -38,11 +38,11 @@ function splitEndpoints(endpoints) {
     return result;
 }
 
-function generateNavigation(endpoints) {
+async function generateNavigation(endpoints) {
     // Split the endpoints into an object
     const endpointObject = splitEndpoints(endpoints);
 
-    function generateHTML(endpointObject) {
+    async function generateHTML(endpointObject) {
       // Create a new unordered list element
       const ul = document.createElement("ul");
       ul.classList.add()
@@ -71,12 +71,11 @@ function generateNavigation(endpoints) {
 
         li.appendChild(a);
 
-        // For description, add <small> to <a>
-        /*
+        // For description, add <small> to <a>        
         const small = document.createElement("small");
-        small.textContent = "Some kind of description";
+        let o = await fetch(`/.netlify/functions/getHTML?link=https://www2.zoetis.ca${obj != undefined ? obj.endpoint : key}`)
+        small.textContent = o.text();
         a.appendChild(small);
-        */
         
         // Check if this is the second level after the root level '/'
         if (key !== '/' && key !== "/fr" && ((endpointMasterEn['/'] == endpointObject) || (endpointMasterFr["/fr"] == endpointObject)) && Object.keys(endpointObject[key]).length === 0) {
@@ -84,7 +83,7 @@ function generateNavigation(endpoints) {
           ulIndex.appendChild(li);
         }
         else{
-          const nestedHTML = generateHTML(endpointObject[key]);
+          const nestedHTML = await generateHTML(endpointObject[key]);
           li.appendChild(nestedHTML);           
   
           // Append the list item to the unordered list
@@ -104,8 +103,8 @@ function generateNavigation(endpoints) {
     delete endpointMasterEn['/']['/fr']
   
     // Generate the HTML for the endpoint object
-    const navHTMLEn = generateHTML(endpointMasterEn);
-    const navHTMLFr = generateHTML(endpointMasterFr);
+    const navHTMLEn = await generateHTML(endpointMasterEn);
+    const navHTMLFr = await generateHTML(endpointMasterFr);
   
     // Add the nav HTML to the document
     const navEn = document.querySelector(".en");
@@ -140,7 +139,7 @@ const parser = new DOMParser();
 // Server Commands - DO NOT DELETE
 fetch("/.netlify/functions/sitemap")
 .then(response => response.text())
-.then((xmlString) => {
+.then((xmlString) => async () => {
   const xml = parser.parseFromString(xmlString, "application/xml");
 
   const urls = xml.getElementsByTagName("url");
@@ -155,7 +154,7 @@ fetch("/.netlify/functions/sitemap")
     json.push({ endpoint, lastmod });
   }
 
-  generateNavigation(json);
+  await generateNavigation(json);
 
   handleChange(document.querySelector("input"))
   handleButtons();
