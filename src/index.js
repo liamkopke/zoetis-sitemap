@@ -141,7 +141,7 @@ const parser = new DOMParser();
 // Server Commands - DO NOT DELETE
 fetch("/.netlify/functions/sitemap")
 .then(response => response.text())
-.then((xmlString) => async () => {
+.then(async (xmlString) => {
   const xml = parser.parseFromString(xmlString, "application/xml");
 
   const urls = xml.getElementsByTagName("url");
