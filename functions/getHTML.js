@@ -6,9 +6,9 @@ exports.handler = (event, context, callback) => {
     axios.get("https://www2.zoetis.ca" + event.queryStringParameters.link)
     .then(response => {
         if(response.status === 200){
-            const html = cheerio.load(response.data);
-            console.log(html);
-            console.log(response.data);
+            const html = response.data
+            console.log(html)
+            console.log(html.links)
             var arr = [], l = html.links;
             for(var i=0; i<l.length; i++) {
                 if(arr.indexOf(l[i].href) === -1){  
