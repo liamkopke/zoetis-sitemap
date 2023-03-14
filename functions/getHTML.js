@@ -1,12 +1,12 @@
 const axios = require('axios');
-import { parse } from 'node-html-parser';
+const HTMLParser = require('node-html-parser');
 
 exports.handler = (event, context, callback) => {    
     console.log(event.queryStringParameters.link);
     axios.get("https://www2.zoetis.ca" + event.queryStringParameters.link)
     .then(response => {
         if(response.status === 200){
-            const data = parse(response.data);
+            const data = HTMLParser.parse(response.data);
             console.log(data)
             console.log(data.querySelectorAll('a'))
             var arr = [], l = data.links;
