@@ -8,9 +8,9 @@ exports.handler = (event, context, callback) => {
     .then(response => {
         if(response.status === 200){
             const html = new JSDOM(response.data)
-            console.log(html)
-            console.log(html.links)
-            var arr = [], l = html.links;
+            console.log(html.window.document)
+            console.log(html.window.document.links)
+            var arr = [], l = html.window.document.links;
             for(var i=0; i<l.length; i++) {
                 if(arr.indexOf(l[i].href) === -1){  
                     arr.push(l[i].href);
