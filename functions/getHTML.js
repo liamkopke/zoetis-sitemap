@@ -6,7 +6,7 @@ exports.handler = (event, context, callback) => {
     axios.get("https://www2.zoetis.ca" + event.queryStringParameters.link)
     .then(response => {
         if(response.status === 200){
-            const dom = new jsdom(response.data);
+            const dom = new jsdom.JSDOM(response.data);
             var arr = []
             dom.window.document.querySelectorAll('a').forEach(a => {
                 if(arr.indexOf(a.textContent) === -1){  
