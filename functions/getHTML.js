@@ -4,10 +4,7 @@ exports.handler = (event, context, callback) => {
     console.log(event.queryStringParameters.link);
     axios.get("https://www2.zoetis.ca" + event.queryStringParameters.link, {responseType: 'document'})
     .then(html => {
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(html, 'text/html');
-
-        var arr = [], l = doc.links;
+        var arr = [], l = html.links;
         for(var i=0; i<l.length; i++) {
             if(arr.indexOf(l[i].href) === -1){  
                 arr.push(l[i].href);
