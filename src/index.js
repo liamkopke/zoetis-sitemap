@@ -39,6 +39,7 @@ function splitEndpoints(endpoints) {
 }
 
 async function generateNavigation(endpoints) {
+    console.log("In Generate Nav")
     // Split the endpoints into an object
     const endpointObject = splitEndpoints(endpoints);
 
@@ -72,8 +73,9 @@ async function generateNavigation(endpoints) {
         li.appendChild(a);
 
         // For description, add <small> to <a>        
+        console.log("Gettings links")
         const small = document.createElement("small");
-        let o = await fetch(`/.netlify/functions/getHTML?link=https://www2.zoetis.ca${obj != undefined ? obj.endpoint : key}`)
+        let o = await fetch(`/.netlify/functions/getHTML?link=${obj != undefined ? obj.endpoint : key}`)
         small.textContent = o.text();
         a.appendChild(small);
         
@@ -153,7 +155,7 @@ fetch("/.netlify/functions/sitemap")
 
     json.push({ endpoint, lastmod });
   }
-
+  console.log(json);
   await generateNavigation(json);
 
   handleChange(document.querySelector("input"))

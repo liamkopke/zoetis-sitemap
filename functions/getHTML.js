@@ -2,7 +2,7 @@ const axios = require('axios');
 
 exports.handler = async ({ queryStringParameters }) => {
     const { link } = queryStringParameters;
-    axios.get(link)
+    axios.get("https://www2.zoetis.ca" + link)
     .then(response => response.text())
     .then(html => {
         const parser = new DOMParser();
