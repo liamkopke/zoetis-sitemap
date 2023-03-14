@@ -72,9 +72,9 @@ async function generateNavigation(endpoints) {
 
         li.appendChild(a);
 
-        // For description, add <small> to <a>        
-        console.log("Gettings links")
+        // For description, add <small> to <a>  
         const small = document.createElement("small");
+        console.log(obj != undefined ? obj.endpoint : key);
         let o = await fetch(`/.netlify/functions/getHTML?link=${obj != undefined ? obj.endpoint : key}`)
         small.textContent = o.text();
         a.appendChild(small);

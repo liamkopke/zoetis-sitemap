@@ -2,8 +2,7 @@ const axios = require('axios');
 
 exports.handler = (event, context, callback) => {    
     console.log(event.queryStringParameters.link);
-    axios.get("https://www2.zoetis.ca" + event.queryStringParameters.link)
-    .then(response => response.text())
+    axios.get("https://www2.zoetis.ca" + event.queryStringParameters.link, {responseType: 'document'})
     .then(html => {
         const parser = new DOMParser();
         const doc = parser.parseFromString(html, 'text/html');
