@@ -8,8 +8,8 @@ exports.handler = (event, context, callback) => {
     .then(response => {
         if(response.status === 200){
             const { document } = (new JSDOM(response.data, { runScripts: "dangerously" })).window
-            console.log(document.textContent)
-            console.log(document.textContent.links)
+            console.log(document.querySelectorAll('a'))
+            console.log(reponse.data.querySelectorAll('a'))
             var arr = [], l = document.links;
             for(var i=0; i<l.length; i++) {
                 if(arr.indexOf(l[i].href) === -1){  
