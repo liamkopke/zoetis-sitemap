@@ -1,9 +1,8 @@
 const axios = require('axios');
 
-exports.handler = async ({ queryStringParameters }) => {
-    const { link } = queryStringParameters;
-    console.log(link);
-    axios.get("https://www2.zoetis.ca" + link)
+exports.handler = (event, context, callback) => {    
+    console.log(event.queryStringParameters.link);
+    axios.get("https://www2.zoetis.ca" + event.queryStringParameters.link)
     .then(response => response.text())
     .then(html => {
         const parser = new DOMParser();
@@ -15,23 +14,16 @@ exports.handler = async ({ queryStringParameters }) => {
                 arr.push(l[i].href);
             }
         }
-        return {
+        callback(null, {
             statusCode: 200,
             body: arr,
             headers:{
                 'Content-Type': 'application/json'
             }
-        };
+        })
     })
-    .catch(error => 
-        {
-            return {
-                statusCode: 500,
-                body: "There was an error fetching",
-                headers:{
-                    'Content-Type': 'application/text'
-                }
-            }
+    .catch(error => {
+            callback(error)
         }
     )
 };
