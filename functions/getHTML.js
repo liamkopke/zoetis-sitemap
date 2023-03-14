@@ -3,12 +3,12 @@ const cheerio = require('cheerio');
 
 exports.handler = (event, context, callback) => {    
     console.log(event.queryStringParameters.link);
-    axios.get("https://www2.zoetis.ca" + event.queryStringParameters.link, {responseType: 'document'})
+    axios.get("https://www2.zoetis.ca" + event.queryStringParameters.link)
     .then(response => {
         if(response.status === 200){
             const html = cheerio.load(response.data);
             console.log(html);
-            console.log(html.links);
+            console.log(response.data);
             var arr = [], l = html.links;
             for(var i=0; i<l.length; i++) {
                 if(arr.indexOf(l[i].href) === -1){  
