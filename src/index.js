@@ -76,6 +76,7 @@ async function generateNavigation(endpoints) {
         const small = document.createElement("small");
         console.log(obj != undefined ? obj.endpoint : key);
         let o = await fetch(`/.netlify/functions/getHTML?link=${obj != undefined ? obj.endpoint : key}`)
+        console.log(o.body);
         small.textContent = o.text();
         a.appendChild(small);
         
