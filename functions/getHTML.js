@@ -2,6 +2,7 @@ const axios = require('axios');
 
 exports.handler = async ({ queryStringParameters }) => {
     const { link } = queryStringParameters;
+    console.log(link);
     axios.get("https://www2.zoetis.ca" + link)
     .then(response => response.text())
     .then(html => {
@@ -11,8 +12,8 @@ exports.handler = async ({ queryStringParameters }) => {
         var arr = [], l = doc.links;
         for(var i=0; i<l.length; i++) {
             if(arr.indexOf(l[i].href) === -1){  
-            arr.push(l[i].href);
-        }
+                arr.push(l[i].href);
+            }
         }
         return {
             statusCode: 200,
