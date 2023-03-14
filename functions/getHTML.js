@@ -14,15 +14,23 @@ exports.handler = async ({ queryStringParameters }) => {
             arr.push(l[i].href);
         }
         }
-        callback(null, {
+        return {
             statusCode: 200,
             body: arr,
             headers:{
                 'Content-Type': 'application/json'
             }
-        });
+        };
     })
-    .catch(error => {
-        callback(error);
-    })
+    .catch(error => 
+        {
+            return {
+                statusCode: 500,
+                body: "There was an error fetching",
+                headers:{
+                    'Content-Type': 'application/text'
+                }
+            }
+        }
+    )
 };
