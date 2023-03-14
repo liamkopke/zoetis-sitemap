@@ -1,20 +1,18 @@
 const axios = require('axios');
+const jsdom = require('jsdom');
 
 exports.handler = (event, context, callback) => {    
     console.log(event.queryStringParameters.link);
     axios.get("https://www2.zoetis.ca" + event.queryStringParameters.link)
     .then(response => {
         if(response.status === 200){
-            const data = document.createElement('div')
-            data.innerHTML = response.data;
-            console.log(data);
-            console.log(data.links);
-            var arr = [], l = data.links;
-            for(var i=0; i<l.length; i++) {
-                if(arr.indexOf(l[i].href) === -1){  
-                    arr.push(l[i].href);
+            const dom = new jsdom(response.data);
+            var arr = []
+            dom.window.document.querySelectorAll('a').forEach(a => {
+                if(arr.indexOf(a.textContent) === -1){  
+                    arr.push(a.textContent);
                 }
-            }
+            });
             callback(null, {
                 statusCode: 200,
                 body: arr,
