@@ -2,11 +2,11 @@ const axios = require("axios");
 const fs = require("fs");
 
 exports.handler = function (event, condition, callback) {
+	const { json } = require("./sitemap.json");
 	try {
-		const data = JSON.parse(fs.readFileSync("../src/sitemap.json").toString());
 		callback(null, {
 			statusCode: 200,
-			body: data,
+			body: json,
 			headers: {
 				"Content-Type": "application/json",
 			},
