@@ -3,7 +3,7 @@ const fs = require("fs");
 
 exports.handler = function (event, condition, callback) {
 	try {
-		const data = JSON.parse(fs.readFileSync("src/sitemap.json").toString());
+		const data = JSON.parse(fs.readFileSync("../src/sitemap.json").toString());
 		callback(null, {
 			statusCode: 200,
 			body: data,
