@@ -1,5 +1,2 @@
-[functions]
-    included_files = ["**.json"]
-
 [build]
     functions = "functions"
