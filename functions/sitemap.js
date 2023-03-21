@@ -1,8 +1,6 @@
-const axios = require("axios");
-const fs = require("fs");
+const { json } = require("./sitemap.json");
 
 exports.handler = function (event, condition, callback) {
-	const { json } = require("./sitemap.json");
 	try {
 		console.log(JSON.stringify(json));
 		callback(null, {
