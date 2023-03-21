@@ -4,9 +4,10 @@ const fs = require("fs");
 exports.handler = function (event, condition, callback) {
 	const { json } = require("./sitemap.json");
 	try {
+		console.log(JSON.stringify(json));
 		callback(null, {
 			statusCode: 200,
-			body: json,
+			body: JSON.stringify(json),
 			headers: {
 				"Content-Type": "application/json",
 			},
