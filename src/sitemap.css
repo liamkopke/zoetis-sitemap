@@ -183,6 +183,7 @@ li a small {
 	vertical-align: middle;
 }
 
+
 /* --- Root --- */
 ul, li {
 	position: relative;
@@ -322,7 +323,7 @@ ul, li {
 .primary > ul > li > a,
 .primary > ul > li > ul > li,
 .secondary li a {
-	width: 300px;
+	width: fit-content;
 }
 
 
@@ -389,4 +390,33 @@ input:checked + .slider:before {
 
 .slider.round:before {
 	border-radius: 50%;
+}
+
+ol a{
+	font-weight: initial;
+	white-space: nowrap;
+	border: none;
+	padding: 0;
+	box-shadow: none;
+	line-height: auto;
+}
+
+ol a:hover{
+	color: var(--levelone)
+}
+
+ol{
+	border-top: 1px solid var(--h2Color);
+	padding-top: 0.5em;
+	margin: 1em 0 0 1em;;
+}
+
+ol button{
+	border: none;
+	padding: 1em 0 0 0;
+	background-color: var(--white);
+}
+
+button:hover{
+	cursor:pointer;
 }
