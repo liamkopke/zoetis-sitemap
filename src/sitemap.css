@@ -103,7 +103,6 @@ ol, ul {
 	display: flex;
 	flex-direction: row;
 	align-items: center;	
-	margin: 20px 0 20px 0;
 }
 
 .sitemap div h1 {
@@ -419,4 +418,33 @@ ol button{
 
 button:hover{
 	cursor:pointer;
+}
+
+.heading{
+	display: flex;
+	flex-direction: row;
+}
+
+.heading div{
+	display: flex;
+	flex-direction: column;
+}
+
+.heading div div{
+	display: flex;
+	flex-direction: row;
+}
+.heading div div > *{
+	Width: 5em;
+}
+.heading div div h1:nth-child(1){
+	text-align: right;
+}
+
+.checkboxes{
+	margin-left: 5em;
+}
+
+.checkboxes div{
+	margin-bottom: 1em;
 }

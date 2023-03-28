@@ -16,16 +16,31 @@
        -->
        
       <div class="sitemap">
-         <h1>Zoetis Canada</h1>
-         <h2>Sitemap &mdash; Version 1.0</h2>
-         <div>
-            <h1>EN</h1>
-            <label class="switch">
-               <input type="checkbox" onchange="handleChange(this)">
-               <span class="slider round"></span>
-            </label>
-            <h1>FR</h1>
-         </div>     
+         <div class="heading">
+            <div>
+               <h1>Zoetis Canada</h1>
+               <h2>Sitemap &mdash; Version 1.0</h2>
+            </div>            
+            <div class="checkboxes">
+               <div>
+                  <h1>EN</h1>
+                  <label class="switch">
+                     <input type="checkbox" onchange="handleLangChange(this)">
+                     <span class="slider round"></span>
+                  </label>
+                  <h1>FR</h1>
+               </div>
+               <div>
+                  <h1>Actual</h1>
+                  <label class="switch">
+                     <input type="checkbox" onchange="handleTypeChange(this)">
+                     <span class="slider round"></span>
+                  </label>
+                  <h1>Xml</h1>
+               </div>
+            </div>            
+         </div>
+              
          <nav class="en primary">
             <!-- For Testing locally -->
             <!-- <ul>

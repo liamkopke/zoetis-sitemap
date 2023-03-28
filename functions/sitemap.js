@@ -1,30 +1,23 @@
-const { json } = require("./sitemap.json");
+const axios = require("axios");
 
-exports.handler = function (event, condition, callback) {
-	try {
-		console.log(JSON.stringify(json));
-		callback(null, {
-			statusCode: 200,
-			body: JSON.stringify(json),
-			headers: {
-				"Content-Type": "application/json",
-			},
+exports.handler = async function (event, condition, callback) {
+	const obj = {};
+	axios
+		.get("https://www2.zoetis.ca/sitemap.xml")
+		.then((response) => {
+			obj["/www2.zoetis.ca"] = response.data.toString("base64");
+			axios.get("https://www.zoetis.ca/sitemap.xml").then((res) => {
+				obj["/www.zoetis.ca"] = res.data.toString("base64");
+				callback(null, {
+					statusCode: 200,
+					body: obj,
+					headers: {
+						"Content-Type": "application/xml",
+					},
+				});
+			});
+		})
+		.catch((error) => {
+			callback(error);
 		});
-	} catch (err) {
-		callback(err);
-	}
-	// axios
-	// 	.get("https://www2.zoetis.ca/sitemap.xml")
-	// 	.then((response) => {
-	// 		callback(null, {
-	// 			statusCode: 200,
-	// 			body: response.data,
-	// 			headers: {
-	// 				"Content-Type": "application/xml",
-	// 			},
-	// 		});
-	// 	})
-	// 	.catch((error) => {
-	// 		callback(error);
-	// 	});
 };

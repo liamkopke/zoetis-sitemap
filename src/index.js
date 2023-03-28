@@ -12321,7 +12321,7 @@ function splitEndpoints(endpoints) {
 	return result;
 }
 
-async function generateNavigation(endpoints) {
+async function generateNavigation(endpoints, type) {
 	console.log("In Generate Nav");
 	// Split the endpoints into an object
 	async function generateHTML(endpoints) {
@@ -12387,13 +12387,31 @@ async function generateNavigation(endpoints) {
 	}
 
 	// Make EN / FR objects
-	endpointMasterFr = {
-		"/www2/fr": JSON.parse(JSON.stringify(endpoints["/www2.zoetis.ca"]["/fr"])),
-		"/www/fr": JSON.parse(JSON.stringify(endpoints["/www.zoetis.ca"]["/fr"])),
-	};
-	endpointMasterEn = JSON.parse(JSON.stringify(endpoints));
-	delete endpointMasterEn["/www2.zoetis.ca"]["/fr"];
-	delete endpointMasterEn["/www.zoetis.ca"]["/fr"];
+	if (type === Types.ACTUAL) {
+		endpointMasterFr = {
+			"/www2.zoetis.ca": JSON.parse(
+				JSON.stringify(endpoints["/www2.zoetis.ca"]["/fr"])
+			),
+			"/www.zoetis.ca": JSON.parse(
+				JSON.stringify(endpoints["/www.zoetis.ca"]["/fr"])
+			),
+		};
+		endpointMasterEn = JSON.parse(JSON.stringify(endpoints));
+		delete endpointMasterEn["/www2.zoetis.ca"]["/fr"];
+		delete endpointMasterEn["/www.zoetis.ca"]["/fr"];
+	} else {
+		endpointMasterFr = {
+			"/www2.zoetis.ca": JSON.parse(
+				JSON.stringify(endpoints["/www2.zoetis.ca"]["/fr"])
+			),
+			"/www.zoetis.ca": JSON.parse(
+				JSON.stringify(endpoints["/www.zoetis.ca"]["/fr"])
+			),
+		};
+		endpointMasterEn = JSON.parse(JSON.stringify(endpoints));
+		delete endpointMasterEn["/www2.zoetis.ca"]["/fr"];
+		delete endpointMasterEn["/www.zoetis.ca"]["/fr"];
+	}
 
 	console.log(endpointMasterEn);
 	console.log(endpointMasterFr);
@@ -12413,47 +12431,60 @@ async function generateNavigation(endpoints) {
 const parser = new DOMParser();
 
 // Server Commands - DO NOT DELETE
-// fetch("/.netlify/functions/sitemap")
-// 	.then((response) => response.json())
-// 	.then(async (json) => {
-// 		// const xml = parser.parseFromString(xmlString, "application/xml");
+fetch("/.netlify/functions/sitemap")
+	.then((response) => response.json())
+	.then(async (json) => {
+		// for(const site in json){
+		// 	const xml = parser.parseFromString(xmlString, "application/xml");
 
-// 		// const urls = xml.getElementsByTagName("url");
-// 		// const json = [];
+		// 	const urls = xml.getElementsByTagName("url");
+		// 	const json = [];
 
-// 		// for (let i = 0; i < urls.length; i++) {
-// 		// 	const url = urls[i];
-// 		// 	const loc = url.getElementsByTagName("loc")[0].textContent;
-// 		// 	const endpoint = loc.replace("https://www2.zoetis.ca", "");
-// 		// 	const lastmod = url.getElementsByTagName("lastmod")[0].textContent;
+		// 	for (let i = 0; i < urls.length; i++) {
+		// 		const url = urls[i];
+		// 		const loc = url.getElementsByTagName("loc")[0].textContent;
+		// 		const endpoint = loc.replace("https://www2.zoetis.ca", "");
+		// 		const lastmod = url.getElementsByTagName("lastmod")[0].textContent;
 
-// 		// 	json.push({ endpoint, lastmod });
-// 		// }
-// 		// console.log(json);
-// 		await generateNavigation(json);
+		// 		json.push({ endpoint, lastmod });
+		// 	}
+		// }
 
-// 		handleChange(document.querySelector("input"));
-// 		handleButtons();
-// 	})
-// 	.catch((error) => {
-// 		console.error(error);
-// 	});
+		console.log(json);
+		// await generateNavigation(json, Types.XML);
+		// await generateNavigation(json, Types.ACTUAL);
 
-async function main() {
-	await generateNavigation(json);
+		// handleLangChange(document.querySelector("input"));
+		// handleButtons();
+	})
+	.catch((error) => {
+		console.error(error);
+	});
 
-	handleChange(document.querySelector("input"));
-	handleButtons();
-}
+// async function main() {
+// 	await generateNavigation(json, Types.ACTUAL);
 
-main();
+// 	handleLangChange(document.querySelector("input"));
+// 	handleButtons();
+// }
+
+// main();
 
 // Lang Switch
-function handleChange(checkbox) {
+function handleLangChange(checkbox) {
 	document.querySelectorAll(".en").forEach((x) => {
 		toggleVisibility(x, !checkbox.checked);
 	});
 	document.querySelectorAll(".fr").forEach((x) => {
+		toggleVisibility(x, checkbox.checked);
+	});
+}
+
+function handleTypeChange(checkbox) {
+	document.querySelectorAll(".actual").forEach((x) => {
+		toggleVisibility(x, !checkbox.checked);
+	});
+	document.querySelectorAll(".xml").forEach((x) => {
 		toggleVisibility(x, checkbox.checked);
 	});
 }
@@ -12500,3 +12531,8 @@ function toggleUrlVisibility(elements) {
 		}
 	});
 }
+
+const Types = Object.freeze({
+	ACTUAL: "actual",
+	XML: "xml",
+});
