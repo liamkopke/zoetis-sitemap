@@ -1,7 +1,7 @@
 const axios = require("axios");
+const obj = {};
 
 exports.handler = async function (event, condition, callback) {
-	const obj = {};
 	axios
 		.get("https://www2.zoetis.ca/sitemap.xml")
 		.then((response) => {
