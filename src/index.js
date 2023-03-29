@@ -24414,7 +24414,6 @@ fetch("/.netlify/functions/sitemap")
 	.then((response) => response.text())
 	.then(async (xmlString) => {
 		// for(const site in json){
-		const xml = parser.parseFromString(xmlString, "application/xml");
 
 		// 	const urls = xml.getElementsByTagName("url");
 		// 	const json = [];
@@ -24429,7 +24428,8 @@ fetch("/.netlify/functions/sitemap")
 		// 	}
 		// }
 
-		console.log(xml);
+		console.log(xmlString);
+		console.log(JSON.stringify(xmlString));
 		// await generateNavigation(json, Types.XML);
 		// await generateNavigation(json, Types.ACTUAL);
 
