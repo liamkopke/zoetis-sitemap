@@ -24412,42 +24412,32 @@ const parser = new DOMParser();
 // Server Commands - DO NOT DELETE
 fetch("/.netlify/functions/sitemap")
 	.then((response) => response.text())
-	.then(async (xmlString) => {
-		// for(const site in json){
+	.then(async (passedJson) => {
+		const netlifyJSON = { "/www2.zoetis.ca": {}, "/www.zoetis.ca": {} };
+		for (const site in passedJson) {
+			const xml = parser.parseFromString(passedJson[site], "application/xml");
+			const urls = xml.getElementsByTagName("url");
+			const smallJSON = netlifyJSON[passedJson.indexOf(site)];
 
-		// 	const urls = xml.getElementsByTagName("url");
-		// 	const json = [];
+			for (let i = 0; i < urls.length; i++) {
+				const url = urls[i];
+				const loc = url.getElementsByTagName("loc")[0].textContent;
+				const endpoint = loc.replace(`https://${site}.zoetis.ca`, "");
+				const lastmod = url.getElementsByTagName("lastmod")[0].textContent;
 
-		// 	for (let i = 0; i < urls.length; i++) {
-		// 		const url = urls[i];
-		// 		const loc = url.getElementsByTagName("loc")[0].textContent;
-		// 		const endpoint = loc.replace("https://www2.zoetis.ca", "");
-		// 		const lastmod = url.getElementsByTagName("lastmod")[0].textContent;
+				smallJSON.push({ endpoint, lastmod });
+			}
 
-		// 		json.push({ endpoint, lastmod });
-		// 	}
-		// }
+			await generateNavigation(netlifyJSON, Types.XML);
+		}
+		await generateNavigation(json, Types.ACTUAL);
 
-		console.log(xmlString);
-		console.log(JSON.stringify(xmlString));
-		// await generateNavigation(json, Types.XML);
-		// await generateNavigation(json, Types.ACTUAL);
-
-		// handleLangChange(document.querySelector("input"));
-		// handleButtons();
+		handleLangChange(document.querySelector("input"));
+		handleButtons();
 	})
 	.catch((error) => {
 		console.error(error);
 	});
-
-// async function main() {
-// 	await generateNavigation(json, Types.ACTUAL);
-
-// 	handleLangChange(document.querySelector("input"));
-// 	handleButtons();
-// }
-
-// main();
 
 // Lang Switch
 function handleLangChange(checkbox) {
