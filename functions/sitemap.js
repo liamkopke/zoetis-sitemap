@@ -5,6 +5,7 @@ exports.handler = async function (event, condition, callback) {
 	axios
 		.get("https://www2.zoetis.ca/sitemap.xml")
 		.then((response) => {
+			console.log(response.data);
 			obj["/www2.zoetis.ca"] = response.data;
 			console.log(obj);
 			axios
@@ -16,7 +17,7 @@ exports.handler = async function (event, condition, callback) {
 						statusCode: 200,
 						body: obj,
 						headers: {
-							"Content-Type": "application/xml",
+							"Content-Type": "application/json",
 						},
 					});
 				})
