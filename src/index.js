@@ -24411,7 +24411,7 @@ const parser = new DOMParser();
 
 // Server Commands - DO NOT DELETE
 fetch("/.netlify/functions/sitemap")
-	.then((response) => response.json())
+	.then((response) => response.text())
 	.then(async (xmlString) => {
 		// for(const site in json){
 		const xml = parser.parseFromString(xmlString, "application/xml");
