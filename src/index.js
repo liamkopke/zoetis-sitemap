@@ -24379,6 +24379,7 @@ async function generateNavigation(endpoints, type) {
 		delete endpointMasterEn["/www2.zoetis.ca"]["/fr"];
 		delete endpointMasterEn["/www.zoetis.ca"]["/fr"];
 	} else {
+		console.log(endpoints);
 		endpointMasterFr = {
 			"/www2.zoetis.ca": JSON.parse(
 				JSON.stringify(endpoints["/www2.zoetis.ca"]["/fr"])
