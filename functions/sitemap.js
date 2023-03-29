@@ -5,17 +5,22 @@ exports.handler = async function (event, condition, callback) {
 	axios
 		.get("https://www2.zoetis.ca/sitemap.xml")
 		.then((response) => {
-			obj["/www2.zoetis.ca"] = response.data.toString("base64");
-			axios.get("https://www.zoetis.ca/sitemap.xml").then((res) => {
-				obj["/www.zoetis.ca"] = res.data.toString("base64");
-				callback(null, {
-					statusCode: 200,
-					body: obj,
-					headers: {
-						"Content-Type": "application/xml",
-					},
+			obj["/www2.zoetis.ca"] = response.data;
+			axios
+				.get("https://www.zoetis.ca/sitemap.xml")
+				.then((res) => {
+					obj["/www.zoetis.ca"] = res.data;
+					callback(null, {
+						statusCode: 200,
+						body: obj,
+						headers: {
+							"Content-Type": "application/xml",
+						},
+					});
+				})
+				.catch((error) => {
+					callback(error);
 				});
-			});
 		})
 		.catch((error) => {
 			callback(error);
