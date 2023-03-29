@@ -24414,12 +24414,11 @@ const parser = new DOMParser();
 fetch("/.netlify/functions/sitemap")
 	.then((response) => response.text())
 	.then(async (passedJson) => {
+		console.log(passedJson);
 		const netlifyJSON = { "/www2.zoetis.ca": {}, "/www.zoetis.ca": {} };
 		for (const site in passedJson) {
 			const xml = parser.parseFromString(passedJson[site], "application/xml");
 			const urls = xml.getElementsByTagName("url");
-			console.log(passedJson.indexOf(site));
-			console.log(netlifyJSON[passedJson.indexOf(site)]);
 			const smallJSON = netlifyJSON[passedJson.indexOf(site)];
 
 			for (let i = 0; i < urls.length; i++) {
@@ -24430,9 +24429,9 @@ fetch("/.netlify/functions/sitemap")
 
 				smallJSON.push({ endpoint, lastmod });
 			}
-			console.log(netlifyJSON);
-			await generateNavigation(netlifyJSON, Types.XML);
 		}
+		console.log(netlifyJSON);
+		await generateNavigation(netlifyJSON, Types.XML);
 		await generateNavigation(json, Types.ACTUAL);
 
 		handleLangChange(document.querySelector("input"));
