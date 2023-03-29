@@ -24412,9 +24412,9 @@ const parser = new DOMParser();
 // Server Commands - DO NOT DELETE
 fetch("/.netlify/functions/sitemap")
 	.then((response) => response.json())
-	.then(async (json) => {
+	.then(async (xmlString) => {
 		// for(const site in json){
-		// 	const xml = parser.parseFromString(xmlString, "application/xml");
+		const xml = parser.parseFromString(xmlString, "application/xml");
 
 		// 	const urls = xml.getElementsByTagName("url");
 		// 	const json = [];
@@ -24429,7 +24429,7 @@ fetch("/.netlify/functions/sitemap")
 		// 	}
 		// }
 
-		console.log(json);
+		console.log(xml);
 		// await generateNavigation(json, Types.XML);
 		// await generateNavigation(json, Types.ACTUAL);
 
