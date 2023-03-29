@@ -19,10 +19,10 @@ exports.handler = async function (event, condition, callback) {
 					});
 				})
 				.catch((error) => {
-					callback(error);
+					callback("www");
 				});
 		})
 		.catch((error) => {
-			callback(error);
+			callback("www2");
 		});
 };
