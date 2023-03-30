@@ -1,3 +1,12 @@
+console.log(
+	"%cCustom JS: Liam Kopke%c - https://liamkopke.com\n%cDate: 30/03/2023\n%cCSS and HTML Template:%c https://github.com/mattbrailsford/css-sitemap",
+	"color: black; background: yellow; font-size: 30px",
+	"color: white; font-size: 30px",
+	"color: black; background: cornflowerblue; font-size: 30px",
+	"color: black; background: greenyellow; font-size: 30px",
+	"color: white; font-size: 30px"
+);
+
 let endpointMasterEn;
 let endpointMasterFr;
 const ulIndex = document.querySelector(".secondary ul");
@@ -105,9 +114,6 @@ async function generateNavigation(endpoints, type) {
 		return ul;
 	}
 
-	console.log("In Generate Nav");
-	console.log("Type: " + type);
-
 	// Make EN / FR objects
 	if (type === Types.ACTUAL) {
 		endpointMasterFr = {
@@ -134,8 +140,6 @@ async function generateNavigation(endpoints, type) {
 		delete endpointMasterEn["/www.zoetis.ca"]["/fr"];
 	}
 
-	console.log(endpointMasterEn);
-	console.log(endpointMasterFr);
 	// Generate the HTML for the endpoint object
 	const navHTMLEn = await generateHTML(endpointMasterEn);
 	const navHTMLFr = await generateHTML(endpointMasterFr);
@@ -161,11 +165,7 @@ fetch("/.netlify/functions/sitemap")
 	.then(async (passedJson) => {
 		passedJson = JSON.parse(passedJson);
 		const netlifyJSON = { "/www2.zoetis.ca": {}, "/www.zoetis.ca": {} };
-		console.log(passedJson.length);
 		for (let site = 0; site < passedJson.length; site++) {
-			console.log(site);
-			console.log(passedJson[site]);
-			console.log(decodeURIComponent(passedJson[site]));
 			const xml = parser.parseFromString(
 				decodeURIComponent(passedJson[site]),
 				"application/xml"
@@ -183,11 +183,9 @@ fetch("/.netlify/functions/sitemap")
 				);
 				const lastmod = url.getElementsByTagName("lastmod")[0].textContent;
 
-				console.log(smallJSON);
 				smallJSON[endpoint] = { loc, lastmod };
 			}
 		}
-		console.log(netlifyJSON);
 		await generateNavigation(netlifyJSON, Types.XML);
 		fetch("/.netlify/functions/getMap")
 			.then((response) => response.text())
