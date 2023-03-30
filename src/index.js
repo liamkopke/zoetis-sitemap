@@ -24295,7 +24295,11 @@ function splitEndpoints(endpoints) {
 			}
 
 			// Store the endpoint at the current block
-			currentBlock = endpoints[lang][endpoint];
+			const endpointObject = {
+				endpoint: endpoints[lang][endpoint][loc],
+				lastmod: endpoints[lang][lastmod],
+			};
+			currentBlock = endpointObject;
 		}
 	}
 
