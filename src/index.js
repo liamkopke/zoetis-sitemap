@@ -24426,7 +24426,8 @@ fetch("/.netlify/functions/sitemap")
 				"application/xml"
 			);
 			const urls = xml.getElementsByTagName("url");
-			const smallJSON = netlifyJSON[site];
+			const smallJSON =
+				netlifyJSON[site == 0 ? "/www2.zoetis.ca" : "/www.zoetis.ca"];
 
 			for (let i = 0; i < urls.length; i++) {
 				const url = urls[i];
