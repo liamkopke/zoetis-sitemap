@@ -24343,9 +24343,13 @@ async function generateNavigation(endpoints, type) {
 				newa.style.display = "none";
 				ol.appendChild(newa);
 			}
-			const button2 = document.createElement("button");
-			button2.innerText = "Show URLs";
-			ol.appendChild(button2);
+
+			if (type !== Types.XML) {
+				const button2 = document.createElement("button");
+				button2.innerText = "Show URLs";
+				ol.appendChild(button2);
+			}
+
 			a.appendChild(ol);
 
 			// Add button to minimize urls
@@ -24468,10 +24472,10 @@ function handleLangChange(checkbox) {
 
 function handleTypeChange(checkbox) {
 	document.querySelectorAll(".actual").forEach((x) => {
-		toggleVisibility(x, !checkbox.checked);
+		toggleVisibility(x, checkbox.checked);
 	});
 	document.querySelectorAll(".xml").forEach((x) => {
-		toggleVisibility(x, checkbox.checked);
+		toggleVisibility(x, !checkbox.checked);
 	});
 }
 
