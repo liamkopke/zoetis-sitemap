@@ -24437,7 +24437,8 @@ fetch("/.netlify/functions/sitemap")
 				);
 				const lastmod = url.getElementsByTagName("lastmod")[0].textContent;
 
-				smallJSON[endpoint] = { endpoint, lastmod };
+				console.log(smallJSON);
+				smallJSON[endpoint] = { loc, lastmod };
 			}
 		}
 		console.log(netlifyJSON);
