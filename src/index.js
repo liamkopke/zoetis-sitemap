@@ -24416,6 +24416,7 @@ fetch("/.netlify/functions/sitemap")
 	.then(async (passedJson) => {
 		console.log(passedJson);
 		const netlifyJSON = { "/www2.zoetis.ca": {}, "/www.zoetis.ca": {} };
+		console.log(passedJson.length);
 		for (let site = 0; site < passedJson.length; site++) {
 			console.log(site);
 			console.log(passedJson[site]);
