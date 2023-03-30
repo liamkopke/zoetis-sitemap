@@ -24419,10 +24419,6 @@ fetch("/.netlify/functions/sitemap")
 		for (const site in passedJson) {
 			const xml = parser.parseFromString(passedJson[site], "application/xml");
 			const urls = xml.getElementsByTagName("url");
-			console.log(site);
-			console.log(passedJson.indexOf(site));
-			console.log(netlifyJSON[passedJson.indexOf(site)]);
-			console.log(netlifyJSON[passedJson[site]]);
 			const smallJSON = netlifyJSON[passedJson.indexOf(site)];
 
 			for (let i = 0; i < urls.length; i++) {
