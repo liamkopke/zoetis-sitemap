@@ -24276,8 +24276,7 @@ function splitEndpoints(endpoints) {
 			const blocks = endpoint.split("/");
 
 			// Start at the root level
-			result[lang][endpoint] = {};
-			let currentBlock = result[lang][endpoint];
+			let currentBlock = result[lang];
 
 			// Loop through each block (skipping the first empty one)
 			for (let j = 1; j < blocks.length; j++) {
@@ -24296,7 +24295,7 @@ function splitEndpoints(endpoints) {
 			}
 
 			// Store the endpoint at the current block
-			currentBlock = endpoint;
+			currentBlock = endpoints[lang][endpoint];
 		}
 	}
 
