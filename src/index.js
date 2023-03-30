@@ -24414,7 +24414,7 @@ const parser = new DOMParser();
 fetch("/.netlify/functions/sitemap")
 	.then((response) => response.text())
 	.then(async (passedJson) => {
-		console.log(passedJson);
+		passedJson = JSON.parse(passedJson);
 		const netlifyJSON = { "/www2.zoetis.ca": {}, "/www.zoetis.ca": {} };
 		console.log(passedJson.length);
 		for (let site = 0; site < passedJson.length; site++) {
