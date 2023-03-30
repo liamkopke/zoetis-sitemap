@@ -24270,11 +24270,12 @@ function splitEndpoints(endpoints) {
 
 	for (let lang in endpoints) {
 		// Loop through each endpoint in the array
-		for (let endpoint in lang) {
+		for (let endpoint in endpoints[lang]) {
 			// Split the endpoint into blocks
 			const blocks = endpoint.split("/");
 
 			// Start at the root level
+			result[lang][endpoint] = {};
 			let currentBlock = result[lang][endpoint];
 
 			// Loop through each block (skipping the first empty one)
