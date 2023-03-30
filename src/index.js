@@ -24385,7 +24385,7 @@ async function generateNavigation(endpoints, type) {
 			"/www2.zoetis.ca": JSON.parse(
 				JSON.stringify(splitEndpoint["/www2.zoetis.ca"]["/fr"])
 			),
-			"/www.zeotis.ca": {},
+			"/www.zoetis.ca": {},
 		};
 		endpointMasterEn = JSON.parse(JSON.stringify(splitEndpoint));
 		delete endpointMasterEn["/www2.zoetis.ca"]["/fr"];
@@ -24397,6 +24397,10 @@ async function generateNavigation(endpoints, type) {
 	// Generate the HTML for the endpoint object
 	const navHTMLEn = await generateHTML(endpointMasterEn);
 	const navHTMLFr = await generateHTML(endpointMasterFr);
+
+	// Add the correct class for the type
+	navHTMLEn.classList.add(type);
+	navHTMLFr.classList.add(type);
 
 	// Add the nav HTML to the document
 	const navEn = document.querySelector(".en");
