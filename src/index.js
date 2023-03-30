@@ -24268,32 +24268,34 @@ function splitEndpoints(endpoints) {
 	// Create an object to hold the result, with the root level "/"
 	const result = {};
 
-	// Loop through each endpoint in the array
-	for (let endpoint in endpoints) {
-		// Split the endpoint into blocks
-		const blocks = endpoint.split("/");
+	for (let lang in endpoints) {
+		// Loop through each endpoint in the array
+		for (let endpoint in lang) {
+			// Split the endpoint into blocks
+			const blocks = endpoint.split("/");
 
-		// Start at the root level
-		let currentBlock = result;
+			// Start at the root level
+			let currentBlock = result[lang][endpoint];
 
-		// Loop through each block (skipping the first empty one)
-		for (let j = 1; j < blocks.length; j++) {
-			const block = blocks[j];
+			// Loop through each block (skipping the first empty one)
+			for (let j = 1; j < blocks.length; j++) {
+				const block = blocks[j];
 
-			// Ignore empty blocks (e.g. if the endpoint starts with "/")
-			if (block !== "") {
-				// If the block doesn't exist yet, create it
-				if (!currentBlock["/" + block]) {
-					currentBlock["/" + block] = {};
+				// Ignore empty blocks (e.g. if the endpoint starts with "/")
+				if (block !== "") {
+					// If the block doesn't exist yet, create it
+					if (!currentBlock["/" + block]) {
+						currentBlock["/" + block] = {};
+					}
+
+					// Move down one level
+					currentBlock = currentBlock["/" + block];
 				}
-
-				// Move down one level
-				currentBlock = currentBlock["/" + block];
 			}
-		}
 
-		// Store the endpoint at the current block
-		currentBlock = endpoint;
+			// Store the endpoint at the current block
+			currentBlock = endpoint;
+		}
 	}
 
 	// Return the result object
