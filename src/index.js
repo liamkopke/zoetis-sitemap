@@ -24266,7 +24266,7 @@ const json = {
 
 function splitEndpoints(endpoints) {
 	// Create an object to hold the result, with the root level "/"
-	const result = { "/": {} };
+	const result = {};
 
 	// Loop through each endpoint in the array
 	for (let i = 0; i < endpoints.length; i++) {
@@ -24274,7 +24274,7 @@ function splitEndpoints(endpoints) {
 		const blocks = endpoints[i].endpoint.split("/");
 
 		// Start at the root level
-		let currentBlock = result["/"];
+		let currentBlock = result;
 
 		// Loop through each block (skipping the first empty one)
 		for (let j = 1; j < blocks.length; j++) {
@@ -24301,7 +24301,6 @@ function splitEndpoints(endpoints) {
 }
 
 async function generateNavigation(endpoints, type) {
-	console.log("In Generate Nav");
 	// Split the endpoints into an object
 	async function generateHTML(endpoints) {
 		// Create a new unordered list element
@@ -24335,7 +24334,6 @@ async function generateNavigation(endpoints, type) {
 
 			// Add URLs
 			const ol = document.createElement("ol");
-			console.log(obj);
 			const urls = obj.urls ?? (obj["/"] ?? { urls: [""] }).urls;
 			for (let url in urls) {
 				const newa = document.createElement("a");
@@ -24365,6 +24363,9 @@ async function generateNavigation(endpoints, type) {
 		return ul;
 	}
 
+	console.log("In Generate Nav");
+	console.log("Type: " + type);
+
 	// Make EN / FR objects
 	if (type === Types.ACTUAL) {
 		endpointMasterFr = {
@@ -24379,7 +24380,7 @@ async function generateNavigation(endpoints, type) {
 		delete endpointMasterEn["/www2.zoetis.ca"]["/fr"];
 		delete endpointMasterEn["/www.zoetis.ca"]["/fr"];
 	} else {
-		console.log(endpoints);
+		console.log(splitEndpoints(endpoints));
 		endpointMasterFr = {
 			"/www2.zoetis.ca": JSON.parse(
 				JSON.stringify(endpoints["/www2.zoetis.ca"]["/fr"])
