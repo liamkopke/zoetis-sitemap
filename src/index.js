@@ -24293,7 +24293,7 @@ function splitEndpoints(endpoints) {
 		}
 
 		// Store the endpoint at the current block
-		currentBlock = endpoints[i].endpoint;
+		currentBlock = endpoint;
 	}
 
 	// Return the result object
