@@ -24429,7 +24429,10 @@ fetch("/.netlify/functions/sitemap")
 			for (let i = 0; i < urls.length; i++) {
 				const url = urls[i];
 				const loc = url.getElementsByTagName("loc")[0].textContent;
-				const endpoint = loc.replace(`https://${site}.zoetis.ca`, "");
+				const endpoint = loc.replace(
+					`https://${site == 0 ? "www2" : "www"}.zoetis.ca`,
+					""
+				);
 				const lastmod = url.getElementsByTagName("lastmod")[0].textContent;
 
 				smallJSON.push({ endpoint, lastmod });

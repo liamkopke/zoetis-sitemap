@@ -1,15 +1,15 @@
 const axios = require("axios");
-const obj = {};
+const obj = [];
 
 exports.handler = function (event, condition, callback) {
 	axios
 		.get("https://www2.zoetis.ca/sitemap.xml")
 		.then((response) => {
-			obj["/www2.zoetis.ca"] = btoa(response.data);
+			obj.push(btoa(response.data));
 			axios
 				.get("https://www.zoetis.ca/sitemap.xml")
 				.then((res) => {
-					obj["/www.zoetis.ca"] = btoa(res.data);
+					obj.push(btoa(res.data));
 					callback(null, {
 						statusCode: 200,
 						body: JSON.stringify(obj),
