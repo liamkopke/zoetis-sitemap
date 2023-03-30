@@ -24419,8 +24419,9 @@ fetch("/.netlify/functions/sitemap")
 		for (let site = 0; site < passedJson.length; site++) {
 			console.log(site);
 			console.log(passedJson[site]);
+			console.log(decodeURIComponent(passedJson[site]));
 			const xml = parser.parseFromString(
-				atob(passedJson[site]),
+				decodeURIComponent(passedJson[site]),
 				"application/xml"
 			);
 			const urls = xml.getElementsByTagName("url");

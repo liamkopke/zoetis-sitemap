@@ -5,11 +5,11 @@ exports.handler = function (event, condition, callback) {
 	axios
 		.get("https://www2.zoetis.ca/sitemap.xml")
 		.then((response) => {
-			obj.push(btoa(response.data));
+			obj.push(encodeURIComponent(response.data));
 			axios
 				.get("https://www.zoetis.ca/sitemap.xml")
 				.then((res) => {
-					obj.push(btoa(res.data));
+					obj.push(encodeURIComponent(res.data));
 					callback(null, {
 						statusCode: 200,
 						body: JSON.stringify(obj),
