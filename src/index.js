@@ -195,8 +195,8 @@ fetch("/.netlify/functions/sitemap")
 				await generateNavigation(JSON.parse(json), Types.ACTUAL);
 			});
 
-		handleLangChange(document.querySelector("langSwitch"));
-		handleTypeChange(document.querySelector("typeSwitch"));
+		handleLangChange(document.querySelector(".langSwitch"));
+		handleTypeChange(document.querySelector(".typeSwitch"));
 		handleButtons();
 	})
 	.catch((error) => {
