@@ -24269,6 +24269,7 @@ function splitEndpoints(endpoints) {
 	const result = {};
 
 	for (let lang in endpoints) {
+		result[lang] = {};
 		// Loop through each endpoint in the array
 		for (let endpoint in endpoints[lang]) {
 			// Split the endpoint into blocks
