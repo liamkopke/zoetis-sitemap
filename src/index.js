@@ -24385,9 +24385,6 @@ async function generateNavigation(endpoints, type) {
 			"/www2.zoetis.ca": JSON.parse(
 				JSON.stringify(splitEndpoint["/www2.zoetis.ca"]["/fr"])
 			),
-			"/www.zoetis.ca": JSON.parse(
-				JSON.stringify(splitEndpoint["/www.zoetis.ca"]["/fr"])
-			),
 		};
 		endpointMasterEn = JSON.parse(JSON.stringify(splitEndpoint));
 		delete endpointMasterEn["/www2.zoetis.ca"]["/fr"];
