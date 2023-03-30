@@ -24282,24 +24282,17 @@ function splitEndpoints(endpoints) {
 			for (let j = 1; j < blocks.length; j++) {
 				const block = blocks[j];
 
-				// Ignore empty blocks (e.g. if the endpoint starts with "/")
-				if (block !== "") {
-					// If the block doesn't exist yet, create it
-					if (!currentBlock["/" + block]) {
-						currentBlock["/" + block] = {};
-					}
-
-					// Move down one level
-					currentBlock = currentBlock["/" + block];
+				// If the block doesn't exist yet, create it
+				if (!currentBlock["/" + block]) {
+					currentBlock["/" + block] = {};
 				}
+
+				// Move down one level
+				currentBlock = currentBlock["/" + block];
 			}
 
 			// Store the endpoint at the current block
-			const endpointObject = {
-				endpoint: endpoints[lang][endpoint].loc,
-				lastmod: endpoints[lang][endpoint].lastmod,
-			};
-			currentBlock = endpointObject;
+			currentBlock = endpoints[lang][endpoint];
 		}
 	}
 
@@ -24387,16 +24380,16 @@ async function generateNavigation(endpoints, type) {
 		delete endpointMasterEn["/www2.zoetis.ca"]["/fr"];
 		delete endpointMasterEn["/www.zoetis.ca"]["/fr"];
 	} else {
-		console.log(splitEndpoints(endpoints));
+		splitEndpoint = splitEndpoints(endpoints);
 		endpointMasterFr = {
 			"/www2.zoetis.ca": JSON.parse(
-				JSON.stringify(endpoints["/www2.zoetis.ca"]["/fr"])
+				JSON.stringify(splitEndpoint["/www2.zoetis.ca"]["/fr"])
 			),
 			"/www.zoetis.ca": JSON.parse(
-				JSON.stringify(endpoints["/www.zoetis.ca"]["/fr"])
+				JSON.stringify(splitEndpoint["/www.zoetis.ca"]["/fr"])
 			),
 		};
-		endpointMasterEn = JSON.parse(JSON.stringify(endpoints));
+		endpointMasterEn = JSON.parse(JSON.stringify(splitEndpoint));
 		delete endpointMasterEn["/www2.zoetis.ca"]["/fr"];
 		delete endpointMasterEn["/www.zoetis.ca"]["/fr"];
 	}
