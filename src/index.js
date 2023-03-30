@@ -24269,9 +24269,9 @@ function splitEndpoints(endpoints) {
 	const result = {};
 
 	// Loop through each endpoint in the array
-	for (let i = 0; i < endpoints.length; i++) {
+	for (let endpoint in endpoints) {
 		// Split the endpoint into blocks
-		const blocks = endpoints[i].endpoint.split("/");
+		const blocks = endpoint.split("/");
 
 		// Start at the root level
 		let currentBlock = result;
