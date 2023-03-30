@@ -24417,7 +24417,10 @@ fetch("/.netlify/functions/sitemap")
 		console.log(passedJson);
 		const netlifyJSON = { "/www2.zoetis.ca": {}, "/www.zoetis.ca": {} };
 		for (const site in passedJson) {
-			const xml = parser.parseFromString(passedJson[site], "application/xml");
+			const xml = parser.parseFromString(
+				Buffer.from(passedJson[site], "base64").toString(),
+				"application/xml"
+			);
 			const urls = xml.getElementsByTagName("url");
 			const smallJSON = netlifyJSON[passedJson.indexOf(site)];
 
