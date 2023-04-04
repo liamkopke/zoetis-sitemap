@@ -227,13 +227,16 @@ function handleButtons() {
 			event.stopPropagation();
 			event.preventDefault();
 
+			console.log("button clicked");
 			// If URL btn
 			if (button.innerText.includes("URL")) {
+				console.log("url button");
 				const urlList = button.parentNode.querySelectorAll("a");
 				toggleUrlVisibility(urlList);
 				button.innerText =
 					button.innerText == "Hide URLs" ? "Show URLs" : "Hide URLs";
 			} else {
+				console.log("minimize button");
 				// Get ul in same li as button
 				const listElement = button.parentNode.parentNode.querySelector("ul");
 
