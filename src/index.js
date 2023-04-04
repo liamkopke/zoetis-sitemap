@@ -104,7 +104,7 @@ async function generateNavigation(endpoints, type) {
 				newa.innerText = `${longUrl}${key}`;
 				newa.href = `${longUrl}${key}`;
 				newa.setAttribute("target", "_blank");
-				newa.style.display = "none";
+				newa.style.display = "list-item";
 				ol.appendChild(newa);
 			}
 
