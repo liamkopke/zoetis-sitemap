@@ -67,7 +67,6 @@ async function generateNavigation(endpoints, type) {
 
 			// Create an anchor tag element with the ID as the href attribute
 			const a = document.createElement("a");
-			longUrl = `${longUrl}${key}`;
 			a.href = longUrl;
 
 			// Add the buttons into the a tag
@@ -104,7 +103,10 @@ async function generateNavigation(endpoints, type) {
 			// Add button to minimize urls
 
 			if (endpoints[Object.keys(endpoints)[1]] != undefined) {
-				const nestedHTML = await generateHTML(endpoints[key], longUrl);
+				const nestedHTML = await generateHTML(
+					endpoints[key],
+					`${longUrl}${key}`
+				);
 				li.appendChild(nestedHTML);
 
 				// Append the list item to the unordered list
