@@ -1,9 +1,13 @@
 console.log(
-	"%cCustom JS: Liam Kopke%c - https://liamkopke.com\n%cDate: 30/03/2023\n%cCSS and HTML Template:%c https://github.com/mattbrailsford/css-sitemap",
-	"color: black; background: yellow; font-size: 30px",
+	"%cCustom JS: Liam Kopke%c - https://liamkopke.com\n%cSitemap GitHub:%c https://github.com/LiamKopke/zoetis-sitemap\n%cWeb Parser GitHub:%c https://github.com/LiamKopke/Puppeteer-Web-Scraper\n%cDate: 30/03/2023\n%cCSS and HTML Template:%c https://github.com/mattbrailsford/css-sitemap",
+	"color: black; background: #ff3352; font-size: 30px",
 	"color: white; font-size: 30px",
-	"color: black; background: cornflowerblue; font-size: 30px",
-	"color: black; background: greenyellow; font-size: 30px",
+	"color: black; background: #f9d814; font-size: 30px",
+	"color: white; font-size: 30px",
+	"color: black; background: #7ae576; font-size: 30px",
+	"color: white; font-size: 30px",
+	"color: black; background: #7fa0fb; font-size: 30px",
+	"color: black; background: #ae86d8; font-size: 30px",
 	"color: white; font-size: 30px"
 );
 
@@ -50,7 +54,7 @@ function splitEndpoints(endpoints) {
 
 async function generateNavigation(endpoints, type) {
 	// Split the endpoints into an object
-	async function generateHTML(endpoints, longUrl) {
+	async function generateHTML(endpoints, longUrl, type) {
 		// Create a new unordered list element
 		const ul = document.createElement("ul");
 		ul.classList.add();
@@ -111,7 +115,8 @@ async function generateNavigation(endpoints, type) {
 			if (endpoints[Object.keys(endpoints)[1]] != undefined) {
 				const nestedHTML = await generateHTML(
 					endpoints[key],
-					`${longUrl}${key}`
+					`${longUrl}${key}`,
+					type
 				);
 				li.appendChild(nestedHTML);
 
@@ -151,8 +156,8 @@ async function generateNavigation(endpoints, type) {
 	}
 
 	// Generate the HTML for the endpoint object
-	const navHTMLEn = await generateHTML(endpointMasterEn, longUrl);
-	const navHTMLFr = await generateHTML(endpointMasterFr, longUrl);
+	const navHTMLEn = await generateHTML(endpointMasterEn, longUrl, type);
+	const navHTMLFr = await generateHTML(endpointMasterFr, longUrl, type);
 
 	// Add the correct class for the type
 	navHTMLEn.classList.add(type);
