@@ -67,7 +67,7 @@ async function generateNavigation(endpoints, type) {
 
 			// Create an anchor tag element with the ID as the href attribute
 			const a = document.createElement("a");
-			a.href = longUrl;
+			a.href = `${longUrl}${key}`;
 
 			// Add the buttons into the a tag
 			if (Object.keys(endpoints[key]).length > 1) {
