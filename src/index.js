@@ -82,20 +82,26 @@ async function generateNavigation(endpoints, type) {
 
 			// Add URLs
 			const ol = document.createElement("ol");
-			const urls = obj.urls ?? (obj["/"] ?? { urls: [""] }).urls;
-			for (let url in urls) {
-				const newa = document.createElement("a");
-				newa.innerText = urls[url];
-				newa.href = urls[url];
-				newa.setAttribute("target", "_blank");
-				newa.style.display = "none";
-				ol.appendChild(newa);
-			}
-
-			if (type !== Types.XML) {
+			if (type == Types.ACTUAL) {
+				const urls = obj.urls ?? (obj["/"] ?? { urls: [""] }).urls;
+				for (let url in urls) {
+					const newa = document.createElement("a");
+					newa.innerText = urls[url];
+					newa.href = urls[url];
+					newa.setAttribute("target", "_blank");
+					newa.style.display = "none";
+					ol.appendChild(newa);
+				}
 				const button2 = document.createElement("button");
 				button2.innerText = "Show URLs";
 				ol.appendChild(button2);
+			} else {
+				const newa = document.createElement("a");
+				newa.innerText = `${longUrl}${key}`;
+				newa.href = `${longUrl}${key}`;
+				newa.setAttribute("target", "_blank");
+				newa.style.display = "none";
+				ol.appendChild(newa);
 			}
 
 			a.appendChild(ol);
