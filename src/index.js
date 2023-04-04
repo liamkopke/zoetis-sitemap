@@ -1,5 +1,5 @@
 console.log(
-	"%cCustom JS: Liam Kopke%c - https://liamkopke.com\n%cSitemap GitHub:%c https://github.com/LiamKopke/zoetis-sitemap\n%cWeb Parser GitHub:%c https://github.com/LiamKopke/Puppeteer-Web-Scraper\n%cDate: 30/03/2023\n%cCSS and HTML Template:%c https://github.com/mattbrailsford/css-sitemap",
+	"%cCustom JS: Liam Kopke%c - https://liamkopke.com\n%cSitemap GitHub:%c https://github.com/liamkopke/zoetis-sitemap\n%cWeb Parser GitHub:%c https://github.com/liamkopke/puppeteer-web-scraper\n%cdate: 30/03/2023\n%cCSS and HTML Template:%c https://github.com/mattbrailsford/css-sitemap",
 	"color: black; background: #ff3352; font-size: 30px",
 	"color: white; font-size: 30px",
 	"color: black; background: #f9d814; font-size: 30px",
