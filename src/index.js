@@ -9,6 +9,7 @@ console.log(
 
 let endpointMasterEn;
 let endpointMasterFr;
+let longUrl = "https:/";
 const ulIndex = document.querySelector(".secondary ul");
 
 function splitEndpoints(endpoints) {
@@ -49,7 +50,7 @@ function splitEndpoints(endpoints) {
 
 async function generateNavigation(endpoints, type) {
 	// Split the endpoints into an object
-	async function generateHTML(endpoints) {
+	async function generateHTML(endpoints, longUrl) {
 		// Create a new unordered list element
 		const ul = document.createElement("ul");
 		ul.classList.add();
@@ -66,7 +67,8 @@ async function generateNavigation(endpoints, type) {
 
 			// Create an anchor tag element with the ID as the href attribute
 			const a = document.createElement("a");
-			a.href = `https:/${key}`;
+			longUrl = `${longUrl}${key}`;
+			a.href = longUrl;
 
 			// Add the buttons into the a tag
 			if (Object.keys(endpoints[key]).length > 1) {
@@ -102,7 +104,7 @@ async function generateNavigation(endpoints, type) {
 			// Add button to minimize urls
 
 			if (endpoints[Object.keys(endpoints)[1]] != undefined) {
-				const nestedHTML = await generateHTML(endpoints[key]);
+				const nestedHTML = await generateHTML(endpoints[key], longUrl);
 				li.appendChild(nestedHTML);
 
 				// Append the list item to the unordered list
@@ -141,8 +143,8 @@ async function generateNavigation(endpoints, type) {
 	}
 
 	// Generate the HTML for the endpoint object
-	const navHTMLEn = await generateHTML(endpointMasterEn);
-	const navHTMLFr = await generateHTML(endpointMasterFr);
+	const navHTMLEn = await generateHTML(endpointMasterEn, longUrl);
+	const navHTMLFr = await generateHTML(endpointMasterFr, longUrl);
 
 	// Add the correct class for the type
 	navHTMLEn.classList.add(type);
